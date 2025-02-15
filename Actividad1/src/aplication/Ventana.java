@@ -25,8 +25,8 @@ public class Ventana extends JFrame {
 
 		this.setLocationRelativeTo(null);
 		
-		this.setMinimumSize(new Dimension(350,350));
-		this.setMaximumSize(new Dimension(750,750));
+		this.setMinimumSize(new Dimension(400,400));
+		this.setMaximumSize(new Dimension(800,800));
 		this.add(this.login());
 		this.repaint();
 		
@@ -50,7 +50,46 @@ public class Ventana extends JFrame {
 		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
 		login.add(etiqueta1);
 		
+		JLabel etiqueta2 = new JLabel("Usuario");
+		etiqueta2.setBounds(60, 90, 80, 30);
+		//etiqueta2.setSize(80,30);
+		//etiqueta2.setLocation(55, 50);
+		etiqueta2.setBackground(Color.WHITE);
+		etiqueta2.setOpaque(true);
+		etiqueta2.setFont(etiquetas);
+		etiqueta2.setHorizontalAlignment(JLabel.CENTER);
+		login.add(etiqueta2);
 		
+		JTextField correo = new JTextField();
+		correo.setBounds(60, 140, 200, 30);
+		correo.setBackground(Color.WHITE);
+		correo.setOpaque(true);
+		correo.setFont(etiquetas);
+		login.add(correo);
+
+		JLabel etiqueta3 = new JLabel("Contraseña");
+		etiqueta3.setBounds(60, 190, 120, 30);
+		etiqueta3.setBackground(Color.WHITE);
+		etiqueta3.setOpaque(true);
+		etiqueta3.setFont(etiquetas);
+		etiqueta3.setHorizontalAlignment(JLabel.CENTER);
+		login.add(etiqueta3);
+		
+		
+		JTextField pase = new JTextField();
+		pase.setBounds(60, 240, 250, 30);
+		pase.setBackground(Color.WHITE);
+		pase.setOpaque(true);
+		pase.setFont(etiquetas);
+		login.add(pase);
+
+		JButton acceso = new JButton("Ingresar");
+		acceso.setBounds(180, 320, 120, 30); 
+		acceso.setBackground(Color.WHITE);
+		acceso.setOpaque(true);
+		acceso.setFont(etiquetas);
+		acceso.setHorizontalAlignment(JButton.CENTER);
+		login.add(acceso);
 		
 		login.revalidate();
 		
