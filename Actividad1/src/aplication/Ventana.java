@@ -8,12 +8,17 @@ import javax.swing.ImageIcon;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -21,7 +26,7 @@ import javax.swing.border.LineBorder;
 
 public class Ventana extends JFrame {
 	
-	Font titulo = new Font("Arial", Font.BOLD, 25);
+	Font titulo = new Font("Arial", Font.BOLD, 30);
 	Font etiquetas = new Font("Arial", Font.BOLD,16);
 	Font et = new Font("Arial", Font.BOLD,10);
 	
@@ -38,8 +43,35 @@ public class Ventana extends JFrame {
 
 		this.setLocationRelativeTo(null);
 		
+		this.setResizable(isMaximumSizeSet());
+		
 		//this.setMinimumSize(new Dimension(200,430));
 		//this.setMaximumSize(new Dimension(600,830));
+		JMenuBar barra = new JMenuBar(); //barra de munus
+		
+		JMenu menu1 = new JMenu("Archivo");
+		JMenu menu2 = new JMenu("Ayuda");
+		
+		JMenuItem opNew = new JMenuItem("Nuevo");
+		JMenuItem opOpen = new JMenuItem("Abrir");
+		JMenuItem opSave = new JMenuItem("Guardar");
+		JMenuItem opClose = new JMenuItem("Cerrar");
+		
+		menu1.add(opNew);
+		menu1.add(opOpen);
+		menu1.add(opSave);
+		menu1.add(opClose);
+		
+		JRadioButtonMenuItem opHelp = new JRadioButtonMenuItem("Manual de Usuario: ");
+		JCheckBoxMenuItem opSupport = new JCheckBoxMenuItem("Soporte tecnico: ");
+		
+		menu2.add(opHelp);
+		menu2.add(opSupport);
+		
+		barra.add(menu1);
+		barra.add(menu2);
+
+		this.setJMenuBar(barra);
 		
 		//this.add(this.registro());
 		this.add(this.login());
@@ -66,10 +98,11 @@ public class Ventana extends JFrame {
 		this.setContentPane(fondo);
 		
 		JLabel etiqueta1 = new JLabel("Bienvenidos");
-		etiqueta1.setSize(160,40);
+		etiqueta1.setSize(180,40);
 		etiqueta1.setLocation(210, 30);
 		//etiqueta1.setBackground(Color.decode("#fc86eb"));
 		etiqueta1.setOpaque(false);
+		etiqueta1.setForeground(Color.WHITE);
 		etiqueta1.setFont(titulo);
 		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
 		panel.add(etiqueta1);
@@ -144,8 +177,9 @@ public class Ventana extends JFrame {
 
 		JButton acceso = new JButton("Ingresar");
 		acceso.setBounds(210, 365, 150, 30); 
-		acceso.setBackground(Color.decode("#30d130"));
+		acceso.setBackground(Color.decode("#2435b1"));
 		acceso.setOpaque(true);
+		acceso.setForeground(Color.WHITE);
 		acceso.setFont(etiquetas);
 		acceso.setHorizontalAlignment(JButton.CENTER);
 		panel.add(acceso);
