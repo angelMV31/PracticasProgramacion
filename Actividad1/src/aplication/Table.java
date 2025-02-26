@@ -49,7 +49,7 @@ public class Table extends JFrame{
 		//this.setSize(385,490);
 		
 		this.setSize(1010, 500);
-		this.setResizable(false);
+		this.setResizable(true);
 
 		this.setLocationRelativeTo(null);
 		

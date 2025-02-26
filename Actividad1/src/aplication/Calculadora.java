@@ -1,8 +1,10 @@
 package aplication;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,7 +16,9 @@ import javax.swing.border.LineBorder;
 
 public class Calculadora extends JFrame{
 	
+	JButton[] arreglo = new JButton[20];
 	
+	String [] textos = {"%","CE","C","\u2190", "1","2","3","+","4","5","6","-","7","8","9","*",".","0","=","/"};
 	
 	Font titulo = new Font("Arial", Font.BOLD, 25);
 	Font etiquetas = new Font("Arial", Font.BOLD,16);
@@ -27,10 +31,9 @@ public class Calculadora extends JFrame{
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//this.setSize(385,490);
+		this.setSize(500,550);
 		
-		this.setSize(1010, 500);
-		this.setResizable(false);
+		this.setResizable(true);
 
 		this.setLocationRelativeTo(null);
 		
@@ -38,12 +41,40 @@ public class Calculadora extends JFrame{
 		this.setMaximumSize(new Dimension(600,830));
 		//this.add(this.login());
 		this.add(this.calculadora());
+		
 		this.repaint();
 		
 	}
 	
-		
 	public JPanel calculadora() {
+		
+		JLabel pantalla = new JLabel();
+		pantalla.setBounds(100, 40, 300, 50);
+		pantalla.setBackground(Color.WHITE);
+		pantalla.setOpaque(true);
+		pantalla.setFont(etiquetas);
+		this.add(pantalla, BorderLayout.NORTH);
+		
+		
+		JPanel botones = new JPanel();
+		botones.setOpaque(true);
+		botones.setBackground(Color.decode("#000000"));
+		botones.setVisible(true);
+		botones.setLayout(null);
+		
+		setLayout(new GridLayout(5,4, 10, 10));
+		
+		for(int i = 0; i<arreglo.length; i++) {
+			arreglo[i] = new JButton(textos[i]);
+			add(arreglo[i]);
+		}
+		
+		this.add(botones, BorderLayout.CENTER);
+		botones.revalidate();
+		return botones;
+	}
+		
+	/*public JPanel calculadora() {
 		//aqui cree el Panel donde se colocaran todos los botones y cuandros de textos
 		JPanel calculadora = new JPanel();
 		calculadora.setLocation(0, 0);
@@ -52,6 +83,8 @@ public class Calculadora extends JFrame{
 		calculadora.setBackground(Color.decode("#000000"));
 		calculadora.setVisible(true);
 		calculadora.setLayout(null);
+		
+		
 		
 		//cree la pantalla
 		JLabel pantalla = new JLabel();
@@ -226,5 +259,7 @@ public class Calculadora extends JFrame{
 		
 		calculadora.revalidate();
 		return calculadora;
-	}
+		
+	}*/
+	
 }

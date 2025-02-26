@@ -62,6 +62,8 @@ public class Ventana extends JFrame {
 		menu1.add(opSave);
 		menu1.add(opClose);
 		
+		
+		
 		JRadioButtonMenuItem opHelp = new JRadioButtonMenuItem("Manual de Usuario: ");
 		JCheckBoxMenuItem opSupport = new JCheckBoxMenuItem("Soporte tecnico: ");
 		

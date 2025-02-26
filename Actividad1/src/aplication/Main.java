@@ -7,8 +7,10 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Ventana Tabla = new Ventana("Login");
+		//Ventana Tabla = new Ventana("Login");
 
+		Calculadora calc = new Calculadora("Calculadora");
+		//Table Datos = new Table("Datos de Registro");
 		//Menu menu = new Menu("Menu");
 	}
 
