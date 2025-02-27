@@ -8,8 +8,8 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		//Ventana Tabla = new Ventana("Login");
-
-		Calculadora calc = new Calculadora("Calculadora");
+		Interfaz interfaz = new Interfaz("Calcular Interes");
+		//Calculadora calc = new Calculadora("Calculadora");
 		//Table Datos = new Table("Datos de Registro");
 		//Menu menu = new Menu("Menu");
 	}
