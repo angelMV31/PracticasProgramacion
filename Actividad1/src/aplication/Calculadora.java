@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 public class Calculadora extends JFrame{
@@ -26,52 +27,69 @@ public class Calculadora extends JFrame{
 
 	public Calculadora(String title) {
 		
-		this.setTitle(title);
-		this.setVisible(true);
+		this.setTitle(title);//titulo de la ventana
+		this.setVisible(true);//hacer visible la ventana
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.setSize(500,550);
+		this.setSize(385,490);
 		
 		this.setResizable(true);
 
-		this.setLocationRelativeTo(null);
+		this.setLocationRelativeTo(null);//colocar la ventana en el medio de la pantalla
 		
 		this.setMinimumSize(new Dimension(200,430));
 		this.setMaximumSize(new Dimension(600,830));
 		//this.add(this.login());
-		this.add(this.calculadora());
 		
+		
+		this.add(this.calculadora());
 		this.repaint();
 		
 	}
 	
 	public JPanel calculadora() {
+		setLayout(new BorderLayout());
+
+		JPanel calculadora = new JPanel();
+		calculadora.setBackground(Color.decode("#000000"));
 		
-		JLabel pantalla = new JLabel();
-		pantalla.setBounds(100, 40, 300, 50);
-		pantalla.setBackground(Color.WHITE);
+		calculadora.setVisible(true);
+		
+		
+		JLabel pantalla = new JLabel("0", SwingConstants.RIGHT);
+		pantalla.setPreferredSize(new Dimension (200,50));
+		pantalla.setBackground(Color.GRAY);
 		pantalla.setOpaque(true);
 		pantalla.setFont(etiquetas);
 		this.add(pantalla, BorderLayout.NORTH);
 		
 		
 		JPanel botones = new JPanel();
+		botones.setSize(400,400);
 		botones.setOpaque(true);
 		botones.setBackground(Color.decode("#000000"));
 		botones.setVisible(true);
-		botones.setLayout(null);
 		
-		setLayout(new GridLayout(5,4, 10, 10));
+		botones.setLayout(new GridLayout(5,4, 10, 10));
 		
 		for(int i = 0; i<arreglo.length; i++) {
 			arreglo[i] = new JButton(textos[i]);
-			add(arreglo[i]);
+			botones.add(arreglo[i]);
+			if(arreglo[i]==arreglo[0] || arreglo[i]==arreglo[1] || arreglo[i]==arreglo[2] || arreglo[i]==arreglo[7] || arreglo[i]==arreglo[11] || arreglo[i]==arreglo[15] || arreglo[i]==arreglo[16] || arreglo[i]==arreglo[19])
+				arreglo[i].setBackground(Color.decode("#b2b2b2"));
+			else if(arreglo[i]==arreglo[4] || arreglo[i]==arreglo[5] || arreglo[i]==arreglo[6] || arreglo[i]==arreglo[8] || arreglo[i]==arreglo[9] || arreglo[i]==arreglo[10] || arreglo[i]==arreglo[12] || arreglo[i]==arreglo[13] || arreglo[i]==arreglo[14] || arreglo[i]==arreglo[17])
+				arreglo[i].setBackground(Color.decode("#ff62cb"));
+			else if(arreglo[i]==arreglo[3])
+				arreglo[i].setBackground(Color.RED);
+			else if(arreglo[i]==arreglo[18])
+				arreglo[i].setBackground(Color.decode("#30d130"));
 		}
 		
-		this.add(botones, BorderLayout.CENTER);
-		botones.revalidate();
-		return botones;
+		calculadora.add(botones);
+		
+		calculadora.add(botones, BorderLayout.CENTER);
+		return calculadora;
 	}
 		
 	/*public JPanel calculadora() {
