@@ -25,14 +25,14 @@ public class Interfaz extends JFrame {
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.setSize(400,500);
+		this.setSize(500,550);
 		
 		this.setResizable(true);
 
 		this.setLocationRelativeTo(null);//colocar la ventana en el medio de la pantalla
 		
-		this.setMinimumSize(new Dimension(200,430));
-		this.setMaximumSize(new Dimension(600,830));
+		//this.setMinimumSize(new Dimension(200,430));
+		//this.setMaximumSize(new Dimension(600,830));
 		//this.add(this.login());
 		
 		

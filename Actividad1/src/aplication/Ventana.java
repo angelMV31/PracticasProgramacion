@@ -26,11 +26,14 @@ import javax.swing.border.LineBorder;
 
 public class Ventana extends JFrame {
 	
-	Font titulo = new Font("Arial", Font.BOLD, 30);
-	Font etiquetas = new Font("Arial", Font.BOLD,16);
-	Font et = new Font("Arial", Font.BOLD,10);
+	Font titulo = new Font("Arial", Font.BOLD, 31);
+	Font etiquetas = new Font("Arial", Font.BOLD,17);
+	Font et = new Font("Arial", Font.BOLD,13);
 	
 	public Ventana(String title) {
+		
+		
+		
 		this.setTitle(title);
 		this.setVisible(true);
 		
@@ -95,22 +98,31 @@ public class Ventana extends JFrame {
 		panel.setOpaque(false);
 		panel.setBounds(0, 0, 1000, 700);
 		this.add(panel);
-		JLabel fondo = new JLabel(new ImageIcon("fondoLogin.png"));
-		fondo.setBounds(0,0,615,614);	
+		ImageIcon i = new ImageIcon(new ImageIcon("fondo.png").getImage().getScaledInstance(980, 600, java.awt.Image.SCALE_SMOOTH));
+		JLabel fondo = new JLabel(i);
+		fondo.setBounds(0,0,980,600);	
 		this.setContentPane(fondo);
 		
+		ImageIcon capiIcon = new ImageIcon("capi.png");
+		this.setIconImage(capiIcon.getImage());
+		
 		JLabel etiqueta1 = new JLabel("Bienvenidos");
-		etiqueta1.setSize(180,40);
+		etiqueta1.setSize(190,40);
 		etiqueta1.setLocation(210, 30);
 		//etiqueta1.setBackground(Color.decode("#fc86eb"));
 		etiqueta1.setOpaque(false);
-		etiqueta1.setForeground(Color.WHITE);
+		etiqueta1.setForeground(Color.decode("#FFFFFF"));
 		etiqueta1.setFont(titulo);
 		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
 		panel.add(etiqueta1);
 		
+		ImageIcon ic = new ImageIcon(new ImageIcon("capi.png").getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH));
+		JLabel capi = new JLabel(ic);
+		capi.setBounds(255, 88, 100, 100);
+		panel.add(capi);
+		
 		JLabel etiqueta2 = new JLabel("Usuario");
-		etiqueta2.setBounds(200, 100, 90, 30);
+		etiqueta2.setBounds(200, 200, 90, 30);
 		//etiqueta2.setSize(80,30);
 		//etiqueta2.setLocation(55, 50);
 		//etiqueta2.setBackground(Color.decode("#fc86eb"));
@@ -121,23 +133,23 @@ public class Ventana extends JFrame {
 		
 		ImageIcon icono = new ImageIcon(new ImageIcon("usuario.png").getImage().getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH));
 		JLabel usuario = new JLabel(icono);
-		usuario.setBounds(160, 100, 30, 30);
+		usuario.setBounds(160, 200, 30, 30);
 		panel.add(usuario);
 		
 		JTextField correo = new JTextField();
-		correo.setBounds(160, 150, 265, 30);
+		correo.setBounds(160, 250, 292, 30);
 		correo.setBackground(Color.WHITE);
 		correo.setOpaque(true);
 		correo.setFont(etiquetas);
 		panel.add(correo);
 		
-		ImageIcon icon = new ImageIcon(new ImageIcon("lock.jpg").getImage().getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon icon = new ImageIcon(new ImageIcon("lok.png").getImage().getScaledInstance(38, 38, java.awt.Image.SCALE_SMOOTH));
 		JLabel lock = new JLabel(icon);
-		lock.setBounds(160, 200, 30, 30);
+		lock.setBounds(160, 300, 38, 38);
 		panel.add(lock);
 
 		JLabel etiqueta3 = new JLabel("Contraseña");
-		etiqueta3.setBounds(200, 200, 90, 30);
+		etiqueta3.setBounds(200, 305, 90, 30);
 		//etiqueta3.setBackground(Color.decode("#fc86eb"));
 		etiqueta3.setOpaque(false);
 		etiqueta3.setFont(etiquetas);
@@ -146,14 +158,19 @@ public class Ventana extends JFrame {
 		
 		
 		JPasswordField pase = new JPasswordField();
-		pase.setBounds(160, 250, 265, 30);
+		pase.setBounds(160, 350, 247, 30);
 		pase.setBackground(Color.WHITE);
-		pase.setOpaque(true);
 		pase.setFont(etiquetas);
 		panel.add(pase);
 		
+		ImageIcon icon2 = new ImageIcon(new ImageIcon("see.png").getImage().getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH));
+		JLabel see = new JLabel(icon2);
+		see.setBounds(415, 352, 25, 25);
+		see.setVisible(true);
+		panel.add(see);
+		
 		JCheckBox check = new JCheckBox();
-		check.setBounds(160, 300, 15, 15);
+		check.setBounds(160, 400, 15, 15);
 		check.setBackground(Color.WHITE);
 		check.setOpaque(true);
 		check.setFont(etiquetas);
@@ -161,7 +178,7 @@ public class Ventana extends JFrame {
 		panel.add(check);
 		
 		JLabel etiqueta4 = new JLabel("Recuerdarme");
-		etiqueta4.setBounds(175, 292, 80, 30);
+		etiqueta4.setBounds(170, 392, 90, 30);
 		//etiqueta4.setBackground(Color.decode("#fc86eb"));
 		etiqueta4.setOpaque(false);
 		etiqueta4.setFont(et);
@@ -169,16 +186,17 @@ public class Ventana extends JFrame {
 		panel.add(etiqueta4);
 		
 		JButton forgot = new JButton("¿Olvidaste tu contraseña?");
-		forgot.setBounds(270, 300, 166, 15);
-		//forgot.setBackground(Color.decode("#fc86eb"));
+		forgot.setBounds(275, 400, 195, 15);
+		forgot.setContentAreaFilled(false); // Quita el fondo del botón
 		forgot.setForeground(Color.RED);
 		forgot.setOpaque(false);
 		forgot.setFont(et);
 		forgot.setHorizontalAlignment(JLabel.RIGHT);
+		forgot.setBorderPainted(false);
 		panel.add(forgot);
 
 		JButton acceso = new JButton("Ingresar");
-		acceso.setBounds(210, 365, 150, 30); 
+		acceso.setBounds(228, 465, 150, 30); 
 		acceso.setBackground(Color.decode("#2435b1"));
 		acceso.setOpaque(true);
 		acceso.setForeground(Color.WHITE);
