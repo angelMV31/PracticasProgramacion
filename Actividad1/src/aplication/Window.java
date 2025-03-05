@@ -26,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import javax.swing.JList;
 
 public class Window {
 
@@ -62,11 +63,6 @@ public class Window {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		Object[][] data = {
-				{"Faby", "Camacho", "Pintar", new Integer(5), new Boolean(false)},
-				{"Lhucas", "Huml", "Patinar", new Integer(3), new Boolean(true)},
-				{"Kathya", "Walrath", "Escalar", new Integer(2), new Boolean(false)},
-				{"Marcus", "Andrews", "Correr", new Integer(7), new Boolean(true)}};
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 900, 550);
@@ -193,6 +189,7 @@ public class Window {
 		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblNewLabel_7);
 		
+		String[] preferences = {"Patinar", "Cantar", "Surfear", "Deportes", "Programar", "Estudiar", "Pintar", "Dibujar"};
 		JLabel lblNewLabel_9 = new JLabel("Preferencias");
 		lblNewLabel_9.setBounds(200, 15, 198, 99);
 		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
@@ -207,8 +204,8 @@ public class Window {
 		scrollPanePreferencias.setBounds(229, 93, 150, 100);
 		panel_1.add(scrollPanePreferencias);
 		
-				JTextArea textAreaPreferencias = new JTextArea();
-				scrollPanePreferencias.setViewportView(textAreaPreferencias);
+		JTextArea textAreaPreferencias = new JTextArea();
+		scrollPanePreferencias.setViewportView(textAreaPreferencias);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.CYAN);

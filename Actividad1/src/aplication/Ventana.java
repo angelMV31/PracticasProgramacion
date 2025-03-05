@@ -1,8 +1,12 @@
 package aplication;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.ImageIcon;
 
 import javax.swing.ButtonGroup;
@@ -42,7 +46,7 @@ public class Ventana extends JFrame {
 		//this.setSize(385,490);
 		
 		this.setSize(615, 614);
-		this.setResizable(false);
+		//this.setResizable(true);
 
 		this.setLocationRelativeTo(null);
 		
@@ -76,8 +80,7 @@ public class Ventana extends JFrame {
 		barra.add(menu1);
 		barra.add(menu2);
 
-		this.setJMenuBar(barra);
-		
+		//this.setJMenuBar(barra);
 		//this.add(this.registro());
 		this.add(this.login());
 		this.repaint();
@@ -103,7 +106,7 @@ public class Ventana extends JFrame {
 		fondo.setBounds(0,0,980,600);	
 		this.setContentPane(fondo);
 		
-		ImageIcon capiIcon = new ImageIcon("capi.png");
+		/*ImageIcon capiIcon = new ImageIcon("capi.png");
 		this.setIconImage(capiIcon.getImage());
 		
 		JLabel etiqueta1 = new JLabel("Bienvenidos");
@@ -202,7 +205,7 @@ public class Ventana extends JFrame {
 		acceso.setForeground(Color.WHITE);
 		acceso.setFont(etiquetas);
 		acceso.setHorizontalAlignment(JButton.CENTER);
-		panel.add(acceso);
+		panel.add(acceso);*/
 		
 		panel.revalidate();
 		
@@ -355,6 +358,47 @@ public class Ventana extends JFrame {
 		
 		return regis;
 	}*/
+	
+	public void paint (Graphics g) {
+		super.paint(g);
+		
+		Graphics2D	 g2 = (Graphics2D) g;
+		
+		g2.setColor(Color.red);
+		g2.drawRect(210, 210, 200, 200);//pinta el contorno de un cuadrado
+		g2.fillRect(270, 270, 80, 80); //
+		g2.clearRect(285, 285, 40, 40);
+		
+		g2.setColor(Color.cyan);
+		g2.fillRoundRect(270, 450, 100, 100, 30, 30);
+		
+		g2.setColor(Color.pink);
+		g2.setStroke(new BasicStroke(10));
+		g2.drawLine(50, 50, 550, 550);
+		
+		g2.setColor(Color.gray);
+		g2.drawOval(260, 80, 120, 100);
+		g2.fillOval(270, 90, 100, 80);
+		
+		g2.setColor(Color.magenta);
+		g2.drawArc(50, 500, 70, 70, 1, -180);
+		g2.fillArc(50, 500, 70, 70, 1, 180);
+		
+		g2.setColor(Color.black);
+		g2.setFont(titulo);
+		g2.drawString("Hola Crayola", 400, 60);
+		
+		
+		int[] xs = {100,100,400};
+		int[] ys = {100,200,400};
+		g2.setColor(Color.blue);
+		g2.drawPolygon(xs, ys, 3);
+		
+		int[] xs2 = {100,100,400};
+		int[] ys2 = {100,200,400};
+		g2.fillPolygon(xs2, ys2, 3);
+		
+	}
 	
 	
 
