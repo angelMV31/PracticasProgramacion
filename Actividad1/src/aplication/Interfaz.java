@@ -15,9 +15,9 @@ import javax.swing.JTextField;
 
 public class Interfaz extends JFrame {
 
-	Font titulo = new Font("Arial", Font.BOLD, 30);
-	Font etiquetas = new Font("Arial", Font.BOLD,16);
-	Font et = new Font("Arial", Font.BOLD,10);
+	Font titulo = new Font("Time New Roman", Font.BOLD, 30);
+	Font etiquetas = new Font("Time New Roman", Font.BOLD,16);
+	Font et = new Font("Time New Roman", Font.BOLD,10);
 	
 	public Interfaz(String title) {
 		this.setTitle(title);//titulo de la ventana

@@ -137,7 +137,7 @@ public class Ventana extends JFrame {
 		panel.add(usuario);
 		
 		JTextField correo = new JTextField();
-		correo.setBounds(160, 250, 292, 30);
+		correo.setBounds(182, 250, 247, 30);
 		correo.setBackground(Color.WHITE);
 		correo.setOpaque(true);
 		correo.setFont(etiquetas);
@@ -149,7 +149,7 @@ public class Ventana extends JFrame {
 		panel.add(lock);
 
 		JLabel etiqueta3 = new JLabel("Contraseña");
-		etiqueta3.setBounds(200, 305, 90, 30);
+		etiqueta3.setBounds(200, 305, 95, 30);
 		//etiqueta3.setBackground(Color.decode("#fc86eb"));
 		etiqueta3.setOpaque(false);
 		etiqueta3.setFont(etiquetas);
@@ -158,14 +158,14 @@ public class Ventana extends JFrame {
 		
 		
 		JPasswordField pase = new JPasswordField();
-		pase.setBounds(160, 350, 247, 30);
+		pase.setBounds(182, 350, 247, 30);
 		pase.setBackground(Color.WHITE);
 		pase.setFont(etiquetas);
 		panel.add(pase);
 		
 		ImageIcon icon2 = new ImageIcon(new ImageIcon("see.png").getImage().getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH));
 		JLabel see = new JLabel(icon2);
-		see.setBounds(415, 352, 25, 25);
+		see.setBounds(437, 352, 25, 25);
 		see.setVisible(true);
 		panel.add(see);
 		
@@ -178,7 +178,7 @@ public class Ventana extends JFrame {
 		panel.add(check);
 		
 		JLabel etiqueta4 = new JLabel("Recuerdarme");
-		etiqueta4.setBounds(170, 392, 90, 30);
+		etiqueta4.setBounds(172, 392, 90, 30);
 		//etiqueta4.setBackground(Color.decode("#fc86eb"));
 		etiqueta4.setOpaque(false);
 		etiqueta4.setFont(et);
