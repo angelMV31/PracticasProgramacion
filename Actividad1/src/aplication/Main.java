@@ -8,7 +8,8 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		
-		MarioBross1 Mario = new MarioBross1("Mario Bross");
+		//MarioBross1 Mario = new MarioBross1("Mario Bross");
+		MarioBross2 Mario2 = new MarioBross2("Mario Bross");
 		//Ventana Tabla = new Ventana("FC Login");
 		//Casa casilla = new Casa("Casa");
 		//Interfaz interfaz = new Interfaz("Calcular Interes");
