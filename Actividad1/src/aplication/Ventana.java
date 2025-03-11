@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -102,9 +103,9 @@ public class Ventana extends JFrame {
 		panel.setOpaque(false);
 		panel.setBounds(0, 0, 1000, 700);
 		this.add(panel);
-		ImageIcon i = new ImageIcon(new ImageIcon("fondo.png").getImage().getScaledInstance(980, 600, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon i = new ImageIcon(new ImageIcon("fondo.png").getImage().getScaledInstance(614, 615, java.awt.Image.SCALE_SMOOTH));
 		JLabel fondo = new JLabel(i);
-		fondo.setBounds(0,0,980,600);	
+		fondo.setBounds(0,0,614,615);	
 		this.setContentPane(fondo);
 		
 		ImageIcon capiIcon = new ImageIcon("capi.png");
@@ -213,26 +214,42 @@ public class Ventana extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Hola");
+				System.out.println("Datos");
+				System.out.println(correo.getText());
+				System.out.println(pase.getText());
 				
-				if(correo.getText().equals("")) {
-					correo.setBorder(BorderFactory.createLineBorder(Color.red));
-				}
-				else
+				int messageType = JOptionPane.INFORMATION_MESSAGE;
+				String message = "Datos Correctos, Bienvenido";
+				String message2 = "Datos Incorrectos";
+				
+				if(correo.getText().equals("fabycamacho@gmail.com")) {
 					correo.setBorder(BorderFactory.createLineBorder(Color.green));
 					band1=true;
-				
-				if(pase.getText().equals("")) {
-					pase.setBorder(BorderFactory.createLineBorder(Color.red));	
 				}
-				else
+				else {
+					correo.setBorder(BorderFactory.createLineBorder(Color.red));
+				}
+				
+				if(pase.getText().equals("100224")) {
 					pase.setBorder(BorderFactory.createLineBorder(Color.green));
 					band2=true;
+				}
+				else {
+					pase.setBorder(BorderFactory.createLineBorder(Color.red));	
+				}
 					
-				
-				if(band1 && band2) {
+				if(band1 && band2) {		
+					JOptionPane.showMessageDialog(null, message, "Estatus", messageType);
 					
 				}
+				else {
+					JOptionPane.showMessageDialog(null, message2, "Estatus", messageType);
+					
+				}
+				
+				
+					
+				
 			}
 			
 		});
