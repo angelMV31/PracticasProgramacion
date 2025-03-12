@@ -37,6 +37,8 @@ public class Ventana extends JFrame {
 	Font etiquetas = new Font("Arial", Font.BOLD,17);
 	Font et = new Font("Arial", Font.BOLD,13);
 	
+	Registro reg = new Registro("Registro");
+	
 	public Ventana(String title) {
 		
 		
@@ -218,7 +220,6 @@ public class Ventana extends JFrame {
 				System.out.println(correo.getText());
 				System.out.println(pase.getText());
 				
-				int messageType = JOptionPane.INFORMATION_MESSAGE;
 				String message = "Datos Correctos, Bienvenido";
 				String message2 = "Datos Incorrectos";
 				
@@ -239,12 +240,11 @@ public class Ventana extends JFrame {
 				}
 					
 				if(band1 && band2) {		
-					JOptionPane.showMessageDialog(null, message, "Estatus", messageType);
+					JOptionPane.showMessageDialog(null, message, "Estatus", JOptionPane.INFORMATION_MESSAGE);
 					
 				}
 				else {
-					JOptionPane.showMessageDialog(null, message2, "Estatus", messageType);
-					
+					JOptionPane.showMessageDialog(null, message2, "Estatus", JOptionPane.ERROR_MESSAGE);
 				}
 				
 				
@@ -253,15 +253,216 @@ public class Ventana extends JFrame {
 			}
 			
 		});
+		
 		panel.add(acceso);
 
+		JButton irRegistro = new JButton("Aun no tienes una cuenta");
+		irRegistro.setBounds(218, 500, 200,30);
+		irRegistro.setFont(et);
+		irRegistro.setVisible(true);
+		irRegistro.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				manager("registro");
+			}
+			
+		});
 		
-		
+		panel.add(irRegistro);
 		
 		panel.revalidate();
 		
 		return panel;
 
+	}
+	
+	public JPanel registro() {
+		JPanel regis = new JPanel();
+		regis.setLayout(null);
+		regis.setOpaque(false);
+		regis.setBounds(0, 0, 1000, 700);
+		this.add(regis);
+		ImageIcon i = new ImageIcon(new ImageIcon("fondo.png").getImage().getScaledInstance(614, 615, java.awt.Image.SCALE_SMOOTH));
+		JLabel fondo = new JLabel(i);
+		fondo.setBounds(0,0,614,615);	
+		this.setContentPane(fondo);
+		
+		JLabel etiqueta1 = new JLabel("Registro");
+		etiqueta1.setSize(180,40);
+		etiqueta1.setLocation(217, 15);
+		etiqueta1.setBackground(new Color(0, 0, 0, 0));
+		etiqueta1.setOpaque(true);
+		etiqueta1.setFont(titulo);
+		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
+		etiqueta1.setForeground(Color.white);
+		regis.add(etiqueta1);
+		
+		JLabel etiqueta2 = new JLabel("Usuario");
+		etiqueta2.setBounds(177, 60, 90, 30);
+		//etiqueta2.setSize(80,30);
+		//etiqueta2.setLocation(55, 50);
+		etiqueta2.setBackground(new Color(0, 0, 0, 0));
+		etiqueta2.setOpaque(true);
+		etiqueta2.setFont(etiquetas);
+		etiqueta2.setHorizontalAlignment(JLabel.LEFT);
+		regis.add(etiqueta2);
+		
+		JTextField correo = new JTextField();
+		correo.setBounds(167, 100, 265, 30);
+		correo.setBackground(Color.WHITE);
+		correo.setOpaque(true);
+		correo.setFont(etiquetas);
+		regis.add(correo);
+
+		JLabel etiqueta3 = new JLabel("Biografía");
+		etiqueta3.setBounds(177, 140, 90, 30);
+		etiqueta3.setBackground(new Color(0, 0, 0, 0));
+		etiqueta3.setOpaque(true);
+		etiqueta3.setFont(etiquetas);
+		etiqueta3.setHorizontalAlignment(JLabel.LEFT);
+		regis.add(etiqueta3);
+		
+		JTextField bio = new JTextField();
+		bio.setBounds(167, 170, 265, 50);
+		bio.setBackground(Color.WHITE);
+		bio.setOpaque(true);
+		bio.setFont(etiquetas);
+		regis.add(bio);
+		
+		ButtonGroup opc = new ButtonGroup();
+		
+		JLabel etiqueta4 = new JLabel("Preferiencias");
+		etiqueta4.setBounds(237, 225, 110, 50);
+		etiqueta4.setBackground(new Color(0, 0, 0, 0));
+		etiqueta4.setOpaque(true);
+		etiqueta4.setFont(etiquetas);
+		etiqueta4.setHorizontalAlignment(JLabel.LEFT);
+		regis.add(etiqueta4);
+		
+		JRadioButton check = new JRadioButton("Dulce");
+		check.setBounds(164, 280, 75, 15);
+		check.setBackground(new Color(0, 0, 0, 0));
+		check.setOpaque(true);
+		check.setFont(etiquetas);
+		check.setHorizontalAlignment(JButton.CENTER);
+		regis.add(check);
+		
+		JRadioButton check2 = new JRadioButton("Salado");
+		check2.setBounds(242, 280, 80, 15);
+		check2.setBackground(new Color(0, 0, 0, 0));
+		check2.setOpaque(true);
+		check2.setFont(etiquetas);
+		check2.setHorizontalAlignment(JButton.CENTER);
+		regis.add(check2);
+		
+		JRadioButton check3 = new JRadioButton("Saludable");
+		check3.setBounds(332, 280, 100, 15);
+		check3.setBackground(new Color(0, 0, 0, 0));
+		check3.setOpaque(true);
+		check3.setFont(etiquetas);
+		check3.setHorizontalAlignment(JButton.CENTER);
+		regis.add(check3);
+		
+		opc.add(check);
+		opc.add(check2);
+		opc.add(check3);
+		
+		String[] colonias = {"Centro", "Villas del Encanto", "Miramar", "Camino Real", "Indeco"};
+		
+		JComboBox col = new JComboBox(colonias);
+		col.setBounds(217, 320, 150, 30);
+		regis.add(col);
+		
+		ButtonGroup terminos = new ButtonGroup();
+		
+		JRadioButton term1 = new JRadioButton("Acepto los términos");
+		term1.setBounds(142, 370, 150, 20);
+		term1.setBackground(new Color(0, 0, 0, 0));
+		term1.setOpaque(true);
+		regis.add(term1);
+		
+		JRadioButton term2 = new JRadioButton("No acepto los términos");
+		term2.setBounds(302, 370, 160, 20);
+		term2.setBackground(new Color(0, 0, 0, 0));
+		term2.setOpaque(true);
+		regis.add(term2);
+		
+		terminos.add(term1);
+		terminos.add(term2);
+		
+		JButton acceso = new JButton("Crear cuenta");
+		acceso.setBounds(217, 400, 150, 30); 
+		acceso.setBackground(Color.decode("#2435b1"));
+		acceso.setOpaque(true);
+		acceso.setFont(etiquetas);
+		acceso.setHorizontalAlignment(JButton.CENTER);
+		acceso.setForeground(Color.white);
+		acceso.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Hola");
+				
+				if(correo.getText().equals("")) {
+					correo.setBorder(BorderFactory.createLineBorder(Color.red));
+				}
+				else
+					correo.setBorder(BorderFactory.createLineBorder(Color.green));
+				
+				if(bio.getText().equals("")) {
+					bio.setBorder(BorderFactory.createLineBorder(Color.red));	
+				}
+				else
+					bio.setBorder(BorderFactory.createLineBorder(Color.green));
+				
+				if(!term1.isSelected() && !term2.isSelected()) {
+					term1.setForeground(Color.red);
+					term2.setForeground(Color.red);				}
+				else {
+					term1.setForeground(Color.green);
+					term2.setForeground(Color.green);
+				}
+					
+			}
+			
+		});
+		
+		JButton irLogin = new JButton("Aun no tienes una cuenta");
+		irLogin.setBounds(218, 500, 200,30);
+		irLogin.setFont(et);
+		irLogin.setVisible(true);
+		irLogin.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				manager("login");
+			}
+			
+		});
+		
+		this.add(irLogin);
+		
+		return regis;
+	}
+	
+	public void manager(String target) {
+		
+		this.getContentPane().removeAll();
+		
+		if(target.equals("registro")) {
+			this.add(registro());			
+		}
+		if(target.equals("login")) {
+			this.add(login());			
+		}
+		
+		this.repaint();
+		this.revalidate();
+		
+		System.out.println("Hola");
 	}
 	
 	

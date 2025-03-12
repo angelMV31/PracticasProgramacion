@@ -180,11 +180,13 @@ public class Registro extends JFrame{
 		JRadioButton term1 = new JRadioButton("Acepto los términos");
 		term1.setBounds(142, 370, 150, 20);
 		term1.setBackground(new Color(0, 0, 0, 0));
+		term1.setOpaque(true);
 		regis.add(term1);
 		
 		JRadioButton term2 = new JRadioButton("No acepto los términos");
 		term2.setBounds(302, 370, 160, 20);
 		term2.setBackground(new Color(0, 0, 0, 0));
+		term2.setOpaque(true);
 		regis.add(term2);
 		
 		terminos.add(term1);
@@ -226,6 +228,8 @@ public class Registro extends JFrame{
 			}
 			
 		});
+		
+		
 		
 		regis.add(acceso);
 		
