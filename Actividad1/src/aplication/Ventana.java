@@ -37,11 +37,28 @@ public class Ventana extends JFrame {
 	Font etiquetas = new Font("Arial", Font.BOLD,17);
 	Font et = new Font("Arial", Font.BOLD,13);
 	
-	Registro reg = new Registro("Registro");
+	Object[][] data = {
+			{"Faby", "Camacho", "Pintar", new Integer(5), new Boolean(false)},
+			{"Lhucas", "Huml", "Patinar", new Integer(3), new Boolean(true)},
+			{"Kathya", "Walrath", "Escalar", new Integer(2), new Boolean(false)},
+			{"Marcus", "Andrews", "Correr", new Integer(7), new Boolean(true)},
+			{"Angela", "Lalth", "Nadar", new Integer(4), new Boolean(false)},
+			{"Angel", "Mendoza", "Beisbol", new Integer(5), new Boolean(false)},
+			{"Sergio", "Olachea", "Basquetbol", new Integer(3), new Boolean(true)},
+			{"Joel", "Zazueta", "Gym", new Integer(2), new Boolean(false)},
+			{"Luis", "Lucatero", "Tejer", new Integer(7), new Boolean(true)},
+			{"Yonathan", "Aguirre", "Golf", new Integer(4), new Boolean(false)},
+			{"David", "Camacho", "Futbol", new Integer(5), new Boolean(false)},
+			{"Diego", "Huml", "Tocho", new Integer(3), new Boolean(true)},
+			{"Sebastian", "Walrath", "Americano", new Integer(2), new Boolean(false)},
+			{"Kevin", "Andrews", "Voleybol", new Integer(7), new Boolean(true)},
+			{"Daniel", "Lalth", "Bolos", new Integer(4), new Boolean(false)}
+			};
+
+	//Array de ‘String’ con los titulos de las columnas
+	String[] columnNames = {"Nombre", "Apellido", "Pasatiempo", "Años de Practica", "Soltero(a)"};
 	
 	public Ventana(String title) {
-		
-		
 		
 		this.setTitle(title);
 		this.setVisible(true);
@@ -57,18 +74,89 @@ public class Ventana extends JFrame {
 		
 		this.setResizable(true);
 		
+		this.add(this.login());
+		
 		//this.setMinimumSize(new Dimension(200,430));
 		//this.setMaximumSize(new Dimension(600,830));
 		JMenuBar barra = new JMenuBar(); //barra de munus
 		
-		JMenu menu1 = new JMenu("Archivo");
-		JMenu menu2 = new JMenu("Ayuda");
+		JMenu menu1 = new JMenu("Usuarios");
+		JMenuItem opNew = new JMenuItem("Alta");
+		JMenuItem opOpen = new JMenuItem("Baja");
+		JMenuItem opSave = new JMenuItem("Consultar");
+		menu1.add(opNew);
+		menu1.add(opOpen);
+		menu1.add(opSave);
 		
-		JMenu menu3 = new JMenu("Ventana");
+		opSave.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				manager("tabla");
+			}
+		});
+		opOpen.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				manager("baja");
+			}
+			
+		});
+		opNew.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				manager("alta");
+			}
+			
+		});
+		
+		JMenu menu2 = new JMenu("Ayuda");
+		JMenuItem comoCrear = new JMenuItem("¿Cómo crear un usuario?");
+		JMenuItem comoAcceder = new JMenuItem("¿Cómo acceder al sistema?");
+		JMenuItem quePasa = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
+		menu2.add(comoCrear);
+		menu2.add(comoAcceder);
+		menu2.add(quePasa);
+		comoCrear.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				manager("crear");
+			}
+			
+		});
+		comoAcceder.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				manager("acceder");
+			}
+			
+		});
+		quePasa.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				manager("contra");
+			}
+			
+		});
+		
+		JMenu menu3 = new JMenu("Cuenta");
 		JMenuItem lg = new JMenuItem("Login");
 		JMenuItem rg = new JMenuItem("Registro");
+		JMenuItem rc = new JMenuItem("Recuperación de cuenta");
 		menu3.add(lg);
 		menu3.add(rg);
+		menu3.add(rc);
 		lg.addActionListener(new ActionListener() {
 
 			@Override
@@ -87,32 +175,23 @@ public class Ventana extends JFrame {
 			}
 			
 		});
+		rc.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				manager("recuperar");
+			}
+			
+		});
 		
-		
-		JMenuItem opNew = new JMenuItem("Nuevo");
-		JMenuItem opOpen = new JMenuItem("Abrir");
-		JMenuItem opSave = new JMenuItem("Guardar");
-		JMenuItem opClose = new JMenuItem("Cerrar");
-		
-		menu1.add(opNew);
-		menu1.add(opOpen);
-		menu1.add(opSave);
-		menu1.add(opClose);
-		
-		
-		
-		JRadioButtonMenuItem opHelp = new JRadioButtonMenuItem("Manual de Usuario: ");
-		JCheckBoxMenuItem opSupport = new JCheckBoxMenuItem("Soporte tecnico: ");
-		
-		menu2.add(opHelp);
-		menu2.add(opSupport);
-		
+		barra.add(menu3);
 		barra.add(menu1);
 		barra.add(menu2);
-		barra.add(menu3);
 		
 		this.setJMenuBar(barra);
-		this.add(this.login());
+		this.validate();
+		this.revalidate();
 		this.repaint();
 		
 	}
@@ -310,16 +389,15 @@ public class Ventana extends JFrame {
 		regis.setOpaque(false);
 		regis.setBounds(0, 0, 1000, 700);
 		this.add(regis);
-		ImageIcon i = new ImageIcon(new ImageIcon("fondo.png").getImage().getScaledInstance(614, 615, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon i = new ImageIcon(new ImageIcon("fondo.png").getImage().getScaledInstance(1000, 700, java.awt.Image.SCALE_SMOOTH));
 		JLabel fondo = new JLabel(i);
-		fondo.setBounds(0,0,614,615);	
+		fondo.setBounds(0,0,1000,700);	
 		this.setContentPane(fondo);
 		
 		JLabel etiqueta1 = new JLabel("Registro");
 		etiqueta1.setSize(180,40);
 		etiqueta1.setLocation(217, 15);
-		etiqueta1.setBackground(new Color(0, 0, 0, 0));
-		etiqueta1.setOpaque(true);
+		etiqueta1.setOpaque(false);
 		etiqueta1.setFont(titulo);
 		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
 		etiqueta1.setForeground(Color.white);
@@ -329,8 +407,8 @@ public class Ventana extends JFrame {
 		etiqueta2.setBounds(177, 60, 90, 30);
 		//etiqueta2.setSize(80,30);
 		//etiqueta2.setLocation(55, 50);
-		etiqueta2.setBackground(new Color(0, 0, 0, 0));
-		etiqueta2.setOpaque(true);
+		//etiqueta2.setBackground(new Color(0, 0, 0, 0));
+		etiqueta2.setOpaque(false);
 		etiqueta2.setFont(etiquetas);
 		etiqueta2.setHorizontalAlignment(JLabel.LEFT);
 		regis.add(etiqueta2);
@@ -344,8 +422,8 @@ public class Ventana extends JFrame {
 
 		JLabel etiqueta3 = new JLabel("Biografía");
 		etiqueta3.setBounds(177, 140, 90, 30);
-		etiqueta3.setBackground(new Color(0, 0, 0, 0));
-		etiqueta3.setOpaque(true);
+		//etiqueta3.setBackground(new Color(0, 0, 0, 0));
+		etiqueta3.setOpaque(false);
 		etiqueta3.setFont(etiquetas);
 		etiqueta3.setHorizontalAlignment(JLabel.LEFT);
 		regis.add(etiqueta3);
@@ -361,32 +439,29 @@ public class Ventana extends JFrame {
 		
 		JLabel etiqueta4 = new JLabel("Preferiencias");
 		etiqueta4.setBounds(237, 225, 110, 50);
-		etiqueta4.setBackground(new Color(0, 0, 0, 0));
-		etiqueta4.setOpaque(true);
+		//etiqueta4.setBackground(new Color(0, 0, 0, 0));
+		etiqueta4.setOpaque(false);
 		etiqueta4.setFont(etiquetas);
 		etiqueta4.setHorizontalAlignment(JLabel.LEFT);
 		regis.add(etiqueta4);
 		
 		JRadioButton check = new JRadioButton("Dulce");
 		check.setBounds(164, 280, 75, 15);
-		check.setBackground(new Color(0, 0, 0, 0));
-		check.setOpaque(true);
+		check.setOpaque(false);
 		check.setFont(etiquetas);
 		check.setHorizontalAlignment(JButton.CENTER);
 		regis.add(check);
 		
 		JRadioButton check2 = new JRadioButton("Salado");
 		check2.setBounds(242, 280, 80, 15);
-		check2.setBackground(new Color(0, 0, 0, 0));
-		check2.setOpaque(true);
+		check2.setOpaque(false);
 		check2.setFont(etiquetas);
 		check2.setHorizontalAlignment(JButton.CENTER);
 		regis.add(check2);
 		
 		JRadioButton check3 = new JRadioButton("Saludable");
 		check3.setBounds(332, 280, 100, 15);
-		check3.setBackground(new Color(0, 0, 0, 0));
-		check3.setOpaque(true);
+		check3.setOpaque(false);
 		check3.setFont(etiquetas);
 		check3.setHorizontalAlignment(JButton.CENTER);
 		regis.add(check3);
@@ -405,14 +480,12 @@ public class Ventana extends JFrame {
 		
 		JRadioButton term1 = new JRadioButton("Acepto los términos");
 		term1.setBounds(142, 370, 150, 20);
-		term1.setBackground(new Color(0, 0, 0, 0));
-		term1.setOpaque(true);
+		term1.setOpaque(false);
 		regis.add(term1);
 		
 		JRadioButton term2 = new JRadioButton("No acepto los términos");
 		term2.setBounds(302, 370, 160, 20);
-		term2.setBackground(new Color(0, 0, 0, 0));
-		term2.setOpaque(true);
+		term2.setOpaque(false);
 		regis.add(term2);
 		
 		terminos.add(term1);
@@ -474,6 +547,199 @@ public class Ventana extends JFrame {
 		return regis;
 	}
 	
+	public JPanel recuperar() {
+		JPanel recuperar = new JPanel();
+		recuperar.setLayout(null);
+		recuperar.setOpaque(false);
+		recuperar.setBounds(0, 0, 614, 615);
+		this.add(recuperar);
+		ImageIcon i = new ImageIcon(new ImageIcon("fondo.png").getImage().getScaledInstance(614, 615, java.awt.Image.SCALE_SMOOTH));
+		JLabel fondo = new JLabel(i);
+		fondo.setBounds(0,0,614,615);	
+		this.setContentPane(fondo);
+		
+		JLabel recuperar1 = new JLabel("Recuperar mi cuenta");
+		recuperar1.setSize(220,40);
+		recuperar1.setLocation(180, 200);
+		recuperar1.setOpaque(false);
+		recuperar1.setFont(etiquetas);
+		recuperar1.setHorizontalAlignment(JLabel.CENTER);
+		recuperar.add(recuperar1);
+		
+		return recuperar;
+	}
+	
+	public JPanel tabla() {
+		JPanel tabla = new JPanel();
+		tabla.setLocation(0, 0);
+		tabla.setSize(1000, 500);
+		tabla.setOpaque(true);
+		tabla.setBackground(Color.WHITE);
+		tabla.setVisible(true);
+		tabla.setLayout(null);
+		
+		JLabel etiqueta1 = new JLabel("Usuarios");
+		etiqueta1.setSize(220,40);
+		etiqueta1.setLocation(180, 20);
+		etiqueta1.setBackground(Color.decode("#71ff6f"));
+		etiqueta1.setOpaque(true);
+		etiqueta1.setFont(titulo);
+		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
+		tabla.add(etiqueta1);
+	
+		JLabel etiqueta3 = new JLabel("Total de usuarios: 15");
+		etiqueta3.setSize(170,40);
+		etiqueta3.setLocation(115, 85);
+		etiqueta3.setBackground(Color.decode("#71ff6f"));
+		etiqueta3.setOpaque(true);
+		etiqueta3.setFont(etiquetas);
+		etiqueta3.setHorizontalAlignment(JLabel.CENTER);
+		tabla.add(etiqueta3);
+		
+		JLabel widget = new JLabel();
+		widget.setSize(210,50);
+		widget.setLocation(100, 80);
+		widget.setBackground(Color.decode("#71ff6f"));
+		widget.setOpaque(true);
+		widget.setFont(titulo);
+		widget.setHorizontalAlignment(JLabel.CENTER);
+		tabla.add(widget);
+		
+		JButton export = new JButton("Exportar");
+		export.setBounds(700, 100, 100, 40);
+		export.setBackground(Color.WHITE);
+		export.setBorder(new LineBorder(Color.decode("#71ff6f")));
+		export.setVisible(true);
+		tabla.add(export);
+		
+		JButton importar = new JButton("Importar");
+		importar.setBounds(810, 100, 100, 40);
+		importar.setBackground(Color.WHITE);
+		importar.setBorder(new LineBorder(Color.decode("#71ff6f")));
+		importar.setVisible(true);
+		tabla.add(importar);
+		
+		JTable tablaDatos = new JTable(data, columnNames);
+		JScrollPane scrollPane = new JScrollPane(tablaDatos);
+		scrollPane.setSize(930,200);
+		scrollPane.setLocation(30,200);
+		tabla.add(scrollPane);
+		
+		return tabla;
+		
+	}
+	
+	public JPanel alta() {
+		JPanel alta = new JPanel();
+		alta.setLayout(null);
+		alta.setOpaque(false);
+		alta.setBounds(0, 0, 614, 615);
+		this.add(alta);
+		ImageIcon i = new ImageIcon(new ImageIcon("fondo.png").getImage().getScaledInstance(614, 615, java.awt.Image.SCALE_SMOOTH));
+		JLabel fondo = new JLabel(i);
+		fondo.setBounds(0,0,614,615);	
+		this.setContentPane(fondo);
+		
+		JLabel alta1 = new JLabel("Alta de cuenta");
+		alta1.setSize(220,40);
+		alta1.setLocation(180, 200);
+		alta1.setOpaque(false);
+		alta1.setFont(etiquetas);
+		alta1.setHorizontalAlignment(JLabel.CENTER);
+		alta.add(alta1);
+		
+		return alta;
+	}
+	
+	public JPanel baja() {
+		JPanel baja = new JPanel();
+		baja.setLayout(null);
+		baja.setOpaque(false);
+		baja.setBounds(0, 0, 614, 615);
+		this.add(baja);
+		ImageIcon i = new ImageIcon(new ImageIcon("fondo.png").getImage().getScaledInstance(614, 615, java.awt.Image.SCALE_SMOOTH));
+		JLabel fondo = new JLabel(i);
+		fondo.setBounds(0,0,614,615);	
+		this.setContentPane(fondo);
+		
+		JLabel baja1 = new JLabel("Baja de cuenta");
+		baja1.setSize(220,40);
+		baja1.setLocation(180, 200);
+		baja1.setOpaque(false);
+		baja1.setFont(etiquetas);
+		baja1.setHorizontalAlignment(JLabel.CENTER);
+		baja.add(baja1);
+		
+		return baja;
+	}
+	
+	public JPanel crear() {
+		JPanel crear = new JPanel();
+		crear.setLayout(null);
+		crear.setOpaque(false);
+		crear.setBounds(0, 0, 614, 615);
+		this.add(crear);
+		ImageIcon i = new ImageIcon(new ImageIcon("fondo.png").getImage().getScaledInstance(614, 615, java.awt.Image.SCALE_SMOOTH));
+		JLabel fondo = new JLabel(i);
+		fondo.setBounds(0,0,614,615);	
+		this.setContentPane(fondo);
+		
+		JLabel crear1 = new JLabel("¿Cómo crear un usuario?");
+		crear1.setSize(220,40);
+		crear1.setLocation(180, 200);
+		crear1.setOpaque(false);
+		crear1.setFont(etiquetas);
+		crear1.setHorizontalAlignment(JLabel.CENTER);
+		crear.add(crear1);
+		
+		return crear;
+	}
+	
+	public JPanel acceder() {
+		JPanel acceder = new JPanel();
+		acceder.setLayout(null);
+		acceder.setOpaque(false);
+		acceder.setBounds(0, 0, 614, 615);
+		this.add(acceder);
+		ImageIcon i = new ImageIcon(new ImageIcon("fondo.png").getImage().getScaledInstance(614, 615, java.awt.Image.SCALE_SMOOTH));
+		JLabel fondo = new JLabel(i);
+		fondo.setBounds(0,0,614,615);	
+		this.setContentPane(fondo);
+		
+		JLabel acceder1 = new JLabel("¿Cómo acceder al sistema?");
+		acceder1.setSize(240,40);
+		acceder1.setLocation(160, 200);
+		acceder1.setOpaque(false);
+		acceder1.setFont(etiquetas);
+		acceder1.setHorizontalAlignment(JLabel.CENTER);
+		acceder.add(acceder1);
+		
+		return acceder;
+	}
+	
+	public JPanel contra() {
+		JPanel contra = new JPanel();
+		contra.setLayout(null);
+		contra.setOpaque(false);
+		contra.setBounds(0, 0, 614, 615);
+		this.add(contra);
+		ImageIcon i = new ImageIcon(new ImageIcon("fondo.png").getImage().getScaledInstance(614, 615, java.awt.Image.SCALE_SMOOTH));
+		JLabel fondo = new JLabel(i);
+		fondo.setBounds(0,0,614,615);	
+		this.setContentPane(fondo);
+		
+		JLabel acceder1 = new JLabel("¿Qué pasa si olvidé mi contraseña?");
+		acceder1.setSize(300,40);
+		acceder1.setLocation(150, 200);
+		acceder1.setOpaque(false);
+		acceder1.setFont(etiquetas);
+		acceder1.setHorizontalAlignment(JLabel.CENTER);
+		contra.add(acceder1);
+		
+		return contra;
+	}
+	
+	
 	public void manager(String target) {
 		
 		this.getContentPane().removeAll();
@@ -483,6 +749,27 @@ public class Ventana extends JFrame {
 		}
 		if(target.equals("login")) {
 			this.add(login());			
+		}
+		if(target.equals("recuperar")) {
+			this.add(recuperar());			
+		}
+		if(target.equals("tabla")) {
+			this.add(tabla());			
+		}
+		if(target.equals("alta")) {
+			this.add(alta());			
+		}
+		if(target.equals("baja")) {
+			this.add(baja());			
+		}
+		if(target.equals("crear")) {
+			this.add(crear());			
+		}
+		if(target.equals("acceder")) {
+			this.add(acceder());			
+		}
+		if(target.equals("contra")) {
+			this.add(contra());			
 		}
 		
 		this.repaint();
