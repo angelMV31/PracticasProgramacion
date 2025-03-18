@@ -10,7 +10,8 @@ public class Main {
 		//Examen2 Examen = new Examen2("Examen");
 		//MarioBross1 Mario = new MarioBross1("Mario Bross");
 		//MarioBross2 Mario2 = new MarioBross2("Mario Bross");
-		Ventana login = new Ventana("FC Login");
+		//Ventana login = new Ventana("FC Login");
+		Listenner boton = new Listenner("CLICK");
 		//Registro registro = new Registro("FC Registro");
 		//Casa casilla = new Casa("Casa");
 		//Interfaz interfaz = new Interfaz("Calcular Interes");
