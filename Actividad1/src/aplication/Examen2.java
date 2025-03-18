@@ -41,21 +41,24 @@ public class Examen2 extends JFrame{
 	
 	public Examen2(String title) {
 		
+		this.setTitle(title);
         this.setSize(600, 700);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        getContentPane().setLayout(null);
+        this.setLayout(null);
 
-        this.getContentPane().add(crearPanelSuperior());
-        this.getContentPane().add(crearPanelSuperior2());
-        this.getContentPane().add(crearPanelSuperior3());
-        this.getContentPane().add(crearTabla());
-        this.getContentPane().add(crearPanelInferior());
+        this.add(crearPanelSuperior());
+        this.add(crearPanelSuperior2());
+        this.add(crearPanelSuperior3());
+        this.add(crearTabla());
+        this.add(crearPanelInferior());
 
         this.setVisible(true);
     }
+	
+	
 
-    private JPanel crearPanelSuperior() {
+    public JPanel crearPanelSuperior() {
         JPanel panelSuperior = new JPanel();
         panelSuperior.setBounds(0, 0, 586, 44);
         panelSuperior.setBackground(Color.BLUE);
@@ -75,7 +78,7 @@ public class Examen2 extends JFrame{
         return panelSuperior;
     }
     
-    private JPanel crearPanelSuperior2() {
+    public JPanel crearPanelSuperior2() {
         JPanel panelSuperior2 = new JPanel();
         panelSuperior2.setBounds(0, 64, 586, 127);
         panelSuperior2.setBorder(new TitledBorder("Datos del Cliente"));
@@ -113,7 +116,7 @@ public class Examen2 extends JFrame{
         return panelSuperior2;
     }
     
-    private JPanel crearPanelSuperior3() {
+    public JPanel crearPanelSuperior3() {
         JPanel panelSuperior3 = new JPanel();
         panelSuperior3.setBounds(0, 201, 586, 117);
         panelSuperior3.setBorder(new TitledBorder("Datos de Factura"));
@@ -137,7 +140,7 @@ public class Examen2 extends JFrame{
         return panelSuperior3;
     }
 
-    private JPanel crearTabla() {
+    public JPanel crearTabla() {
         JPanel panelTabla = new JPanel();
         panelTabla.setSize(586, 154);
         panelTabla.setLayout(null);
@@ -157,7 +160,7 @@ public class Examen2 extends JFrame{
         return panelTabla;
     }
 
-    private JPanel crearPanelInferior() {
+    public JPanel crearPanelInferior() {
         JPanel panelInferior = new JPanel();
         panelInferior.setBounds(0, 509, 586, 154);
         panelInferior.setBorder(new TitledBorder("Total"));
