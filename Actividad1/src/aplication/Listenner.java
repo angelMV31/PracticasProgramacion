@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Listenner extends JFrame{
@@ -60,9 +61,12 @@ public Listenner(String title) {
 		boton.setBounds(450,600,100,30);
 		boton.addActionListener(new ActionListener() {
 
+		int contador = 1;
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JButton button2 = new JButton("HOla");
+				
+				JButton button2 = new JButton("HOla "+ contador);
+				
 				Random rand = new Random();
 				
 				int x = rand.nextInt(1000);
@@ -75,7 +79,21 @@ public Listenner(String title) {
 				button2.setBackground(new Color(col1,col2,col3));
 				
 				button2.setBounds(x,y,100,30);
+				
+				String texto = button2.getText();
+				
+				button2.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(null,texto,"Mensaje",JOptionPane.INFORMATION_MESSAGE);
+					}
+					
+				});
+				
 				panel.add(button2);
+				
+				contador++;
 				
 				panel.repaint();
 			}
