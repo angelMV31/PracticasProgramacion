@@ -90,7 +90,7 @@ public Listenner(String title) {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						JOptionPane.showMessageDialog(null,texto,"Mensaje",JOptionPane.INFORMATION_MESSAGE);
-						i=JOptionPane.showConfirmDialog(null,button2, "Eliminar Boton??",JOptionPane.YES_NO_OPTION);
+						i=JOptionPane.showConfirmDialog(null, button2, "Eliminar Boton??",JOptionPane.YES_NO_OPTION);
 						if(i==0)
 							remove(button2);
 						
