@@ -278,18 +278,18 @@ public class Tictactoe {
 	
 	public void validarGanador() {
 	if(!boton1.getText().equals("") && boton1.getText().equals(boton2.getText()) &
-			   !boton2.getText().equals("") && boton2.getText().equals(boton3.getText())){
-				if(jugador.equals("X")) {
-					String message = "El Jugador X ganó. :D"; 
-					JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE); //ventana emergente
-				}else{
-					String message = "El Jugador O ganó. :D"; 
-					JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE); //ventana emergente
-				}
-				boton1.setEnabled(false);boton2.setEnabled(false);boton3.setEnabled(false);
-				boton4.setEnabled(false);boton5.setEnabled(false);boton6.setEnabled(false);
-				boton7.setEnabled(false);boton8.setEnabled(false);boton9.setEnabled(false);
+	   !boton2.getText().equals("") && boton2.getText().equals(boton3.getText())){
+			if(jugador.equals("X")) {
+				String message = "El Jugador X ganó"; 
+				JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE); //ventana emergente
+			}else{
+				String message = "El Jugador O ganó"; 
+				JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE); //ventana emergente
 			}
+			boton1.setEnabled(false);boton2.setEnabled(false);boton3.setEnabled(false);
+			boton4.setEnabled(false);boton5.setEnabled(false);boton6.setEnabled(false);
+			boton7.setEnabled(false);boton8.setEnabled(false);boton9.setEnabled(false);
+		}
 
 	}
 }
