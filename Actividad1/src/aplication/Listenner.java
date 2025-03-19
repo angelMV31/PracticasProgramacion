@@ -68,9 +68,11 @@ public Listenner(String title) {
 				JButton button2 = new JButton("HOla "+ contador);
 				
 				Random rand = new Random();
-				
 				int x = rand.nextInt(1000);
 				int y= rand.nextInt(700);
+				
+				int xTam = rand.nextInt(100);
+				int yTam= rand.nextInt(100);
 				
 				int col1 = rand.nextInt(250);
 				int col2 = rand.nextInt(250);
@@ -78,15 +80,21 @@ public Listenner(String title) {
 				
 				button2.setBackground(new Color(col1,col2,col3));
 				
-				button2.setBounds(x,y,100,30);
+				button2.setBounds(x,y,xTam,yTam);
 				
 				String texto = button2.getText();
 				
 				button2.addActionListener(new ActionListener() {
 
+					int i = 0;
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						JOptionPane.showMessageDialog(null,texto,"Mensaje",JOptionPane.INFORMATION_MESSAGE);
+						i=JOptionPane.showConfirmDialog(null,button2, "Eliminar Boton??",JOptionPane.YES_NO_OPTION);
+						if(i==0)
+							remove(button2);
+						
+						panel.repaint();
 					}
 					
 				});

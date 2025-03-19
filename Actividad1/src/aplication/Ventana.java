@@ -371,7 +371,7 @@ public class Ventana extends JFrame {
 			}
 			
 		});
-		
+		 
 		panel.add(irRegistro);
 		
 		panel.revalidate();
