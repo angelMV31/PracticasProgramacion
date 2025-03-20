@@ -11,9 +11,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import java.awt.Font;
+import javax.swing.JLabel;
 
 public class Tictactoe {
 
@@ -22,6 +24,12 @@ public class Tictactoe {
 	public boolean turno;
 	String jugador;
 	JButton boton1,boton2,boton3,boton4,boton5,boton6,boton7,boton8,boton9;
+	int contadorX = 0;
+	int contadorO = 0;
+	private JButton btnNewButton;
+	private JPanel panel_1;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
 	/**
 	 * Launch the application.
 	 */
@@ -50,14 +58,78 @@ public class Tictactoe {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 545, 460);
+		frame.setBounds(100, 100, 546, 582);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		btnNewButton = new JButton("Jugar de Nuevo");
+		btnNewButton.setBounds(0, 512, 532, 33);
+		btnNewButton.setBackground(new Color(0, 255, 64));
+		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btnNewButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boton1.setEnabled(true);
+				boton2.setEnabled(true);
+				boton3.setEnabled(true);
+				boton4.setEnabled(true);
+				boton5.setEnabled(true);
+				boton6.setEnabled(true);
+				boton7.setEnabled(true);
+				boton8.setEnabled(true);
+				boton9.setEnabled(true);
+				
+				boton1.setText("");
+				boton2.setText("");
+				boton3.setText("");
+				boton4.setText("");
+				boton5.setText("");
+				boton6.setText("");
+				boton7.setText("");
+				boton8.setText("");
+				boton9.setText("");
+				
+				boton1.setBackground(Color.white);
+				boton2.setBackground(Color.white);
+				boton3.setBackground(Color.white);
+				boton4.setBackground(Color.white);
+				boton5.setBackground(Color.white);
+				boton6.setBackground(Color.white);
+				boton7.setBackground(Color.white);
+				boton8.setBackground(Color.white);
+				boton9.setBackground(Color.white);
+			}
+			
+		});
+		frame.getContentPane().setLayout(null);
+		frame.getContentPane().add(btnNewButton);
+		
+		panel_1 = new JPanel();
+		panel_1.setBounds(0, 0, 532, 25);
+		frame.getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Ganadas del jugador X: ");
+		lblNewLabel.setBounds(0, 0, 140, 30);
+		panel_1.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Ganadas del jugador 0: ");
+		lblNewLabel_1.setBounds(291, 0, 140, 30);
+		panel_1.add(lblNewLabel_1);
+		
+		lblNewLabel_2 = new JLabel(""+contadorO);
+		lblNewLabel_2.setBounds(441, 0, 45, 30);
+		panel_1.add(lblNewLabel_2);
+		
+		lblNewLabel_3 = new JLabel(""+contadorX);
+		lblNewLabel_3.setBounds(150, 0, 45, 30);
+		panel_1.add(lblNewLabel_3);
+		
 		JPanel panel = new JPanel();
+		panel.setBounds(0, 24, 532, 488);
 		panel.setBorder(new LineBorder(new Color(0, 0, 255), 10, true));
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		frame.getContentPane().add(panel);
 		panel.setBackground(Color.blue);
-		panel.setLayout(new GridLayout(3, 3, 10, 10));
 		
 		boton1 = new JButton("");
 		boton1.setFont(new Font("Times New Roman", Font.BOLD, 60));
@@ -70,10 +142,13 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					boton1.setBackground(Color.red);
+					
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					boton1.setBackground(Color.cyan);
 				}
 				boton1.setText(jugador);
 				boton1.setEnabled(false);
@@ -81,6 +156,7 @@ public class Tictactoe {
 			}
 			
 		});
+		panel.setLayout(new GridLayout(3, 3, 10, 10));
 		panel.add(boton1);
 		
 		boton2 = new JButton("");
@@ -94,10 +170,12 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					boton2.setBackground(Color.red);
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					boton2.setBackground(Color.cyan);
 				}
 				boton2.setText(jugador);
 				boton2.setEnabled(false);
@@ -118,10 +196,12 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					boton3.setBackground(Color.red);
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					boton3.setBackground(Color.cyan);
 				}
 				boton3.setText(jugador);
 				boton3.setEnabled(false);
@@ -142,10 +222,12 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					boton4.setBackground(Color.red);
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					boton4.setBackground(Color.cyan);
 				}
 				boton4.setText(jugador);
 				boton4.setEnabled(false);
@@ -166,10 +248,12 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					boton5.setBackground(Color.red);
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					boton5.setBackground(Color.cyan);
 				}
 				boton5.setText(jugador);
 				boton5.setEnabled(false);
@@ -190,10 +274,12 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					boton6.setBackground(Color.red);
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					boton6.setBackground(Color.cyan);
 				}
 				boton6.setText(jugador);
 				boton6.setEnabled(false);
@@ -214,10 +300,12 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					boton7.setBackground(Color.red);
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					boton7.setBackground(Color.cyan);
 				}
 				boton7.setText(jugador);
 				boton7.setEnabled(false);
@@ -238,10 +326,12 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					boton8.setBackground(Color.red);
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					boton8.setBackground(Color.cyan);
 				}
 				boton8.setText(jugador);
 				boton8.setEnabled(false);
@@ -262,10 +352,12 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					boton9.setBackground(Color.red);
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					boton9.setBackground(Color.cyan);
 				}
 				boton9.setText(jugador);
 				boton9.setEnabled(false);
@@ -277,19 +369,187 @@ public class Tictactoe {
 	}
 	
 	public void validarGanador() {
-	if(!boton1.getText().equals("") && boton1.getText().equals(boton2.getText()) &
-	   !boton2.getText().equals("") && boton2.getText().equals(boton3.getText())){
-			if(jugador.equals("X")) {
-				String message = "El Jugador X ganó"; 
-				JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE); //ventana emergente
-			}else{
-				String message = "El Jugador O ganó"; 
-				JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE); //ventana emergente
-			}
-			boton1.setEnabled(false);boton2.setEnabled(false);boton3.setEnabled(false);
-			boton4.setEnabled(false);boton5.setEnabled(false);boton6.setEnabled(false);
-			boton7.setEnabled(false);boton8.setEnabled(false);boton9.setEnabled(false);
+	    if(!boton1.getText().equals("") && 
+	       boton1.getText().equals(boton2.getText()) && 
+	       boton2.getText().equals(boton3.getText())) {
+	        
+	        String message = "El Jugador " + boton1.getText() + " ganó";
+	        JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE);
+	        if(boton1.getText().equals("X")) {
+	        	contadorX++;
+	        	lblNewLabel_3.setText(""+contadorX);
+	        	System.out.print(contadorX);
+	        }
+        else {
+        	contadorO++;
+        	lblNewLabel_2.setText(""+contadorO);
+        	System.out.print(contadorO);
+        }
+	        desabilitaBotones();
+	    }
+	    else if(!boton4.getText().equals("") && 
+ 	       boton4.getText().equals(boton5.getText()) && 
+	       boton5.getText().equals(boton6.getText())) {
+	    	
+	    	String message = "El Jugador " + boton4.getText() + " ganó";
+	        JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE);
+	        if(boton4.getText().equals("X")) {
+	        	contadorX++;
+	        	lblNewLabel_3.setText(""+contadorX);
+	        	System.out.print(contadorX);
+	        }
+        else {
+        	contadorO++;
+        	lblNewLabel_2.setText(""+contadorO);
+        	System.out.print(contadorO);
+        }
+	        desabilitaBotones();
+	    }
+	    else if(!boton7.getText().equals("") && 
+	  	       boton7.getText().equals(boton8.getText()) && 
+	 	       boton8.getText().equals(boton9.getText())) {
+	 	    	
+	 	    	String message = "El Jugador " + boton7.getText() + " ganó";
+	 	        JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE);
+	 	       if(boton7.getText().equals("X")) {
+		        	contadorX++;
+		        	lblNewLabel_3.setText(""+contadorX);
+		        	System.out.print(contadorX);
+		        }
+	        else {
+	        	contadorO++;
+	        	lblNewLabel_2.setText(""+contadorO);
+	        	System.out.print(contadorO);
+	        }
+	 	        desabilitaBotones();
+	 	 }
+	    else if(!boton1.getText().equals("") && 
+		  	       boton1.getText().equals(boton4.getText()) && 
+		 	       boton4.getText().equals(boton7.getText())) {
+		 	    	
+		 	    	String message = "El Jugador " + boton1.getText() + " ganó";
+		 	        JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE);
+		 	       if(boton1.getText().equals("X")) {
+			        	contadorX++;
+			        	lblNewLabel_3.setText(""+contadorX);
+			        	System.out.print(contadorX);
+			        }
+		        else {
+		        	contadorO++;
+		        	lblNewLabel_2.setText(""+contadorO);
+		        	System.out.print(contadorO);
+		        }
+		 	        desabilitaBotones();
+		 }
+	    else if(!boton2.getText().equals("") && 
+		  	       boton2.getText().equals(boton5.getText()) && 
+		 	       boton5.getText().equals(boton8.getText())) {
+		 	    	
+		 	    	String message = "El Jugador " + boton2.getText() + " ganó";
+		 	        JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE);
+		 	       if(boton2.getText().equals("X")) {
+			        	contadorX++;
+			        	lblNewLabel_3.setText(""+contadorX);
+			        	System.out.print(contadorX);
+			        }
+		 	       else {
+		        	contadorO++;
+		        	lblNewLabel_2.setText(""+contadorO);
+		        	System.out.print(contadorO);
+		        }
+		 	        desabilitaBotones();
+		 }
+	    else if(!boton3.getText().equals("") && 
+		  	       boton3.getText().equals(boton6.getText()) && 
+		 	       boton6.getText().equals(boton9.getText())) {
+		 	    	
+		 	    	String message = "El Jugador " + boton3.getText() + " ganó";
+		 	        JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE);
+		 	       if(boton3.getText().equals("X")) {
+			        	contadorX++;
+			        	lblNewLabel_3.setText(""+contadorX);
+			        	System.out.print(contadorX);
+			        }
+		 	       else {
+		        	contadorO++;
+		        	lblNewLabel_2.setText(""+contadorO);
+		        	System.out.print(contadorO);
+		        }
+		 	        desabilitaBotones();
+		 }
+	    else if(!boton1.getText().equals("") && 
+		  	       boton1.getText().equals(boton5.getText()) && 
+		 	       boton5.getText().equals(boton9.getText())) {
+		 	    	
+		 	    	String message = "El Jugador " + boton1.getText() + " ganó";
+		 	        JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE);
+		 	       if(boton1.getText().equals("X")) {
+			        	contadorX++;
+			        	lblNewLabel_3.setText(""+contadorX);
+			        	System.out.print(contadorX);
+			        }
+		 	       else {
+		        	contadorO++;
+		        	lblNewLabel_2.setText(""+contadorO);
+		        	System.out.print(contadorO);
+		        }
+		 	        desabilitaBotones();
+		 }
+	    else if(!boton3.getText().equals("") && 
+		  	       boton3.getText().equals(boton5.getText()) && 
+		 	       boton5.getText().equals(boton7.getText())) {
+		 	    	
+		 	    	String message = "El Jugador " + boton3.getText() + " ganó";
+		 	        JOptionPane.showMessageDialog(null, message, "Ganador", JOptionPane.INFORMATION_MESSAGE);
+		 	       if(boton3.getText().equals("X")) {
+			        	contadorX++;
+			        	lblNewLabel_3.setText(""+contadorX);
+			        	System.out.print(contadorX);
+			        }
+		        else {
+		        	contadorO++;
+		        	lblNewLabel_2.setText(""+contadorO);
+		        	System.out.print(contadorO);
+		        }
+		 	        desabilitaBotones();
+		 }
+	    else if(!boton1.getText().equals("") && 
+		  	       !boton2.getText().equals("") && 
+		 	       !boton3.getText().equals("") &&
+		 	       !boton4.getText().equals("") && 
+		 	       !boton5.getText().equals("") && 
+		  	       !boton6.getText().equals("") && 
+		 	       !boton7.getText().equals("") &&
+		 	       !boton8.getText().equals("") && 
+		 	       !boton9.getText().equals("")) {
+	    	JOptionPane.showMessageDialog(null, "Hubo empate", "Ganador", JOptionPane.INFORMATION_MESSAGE);
+	    	
+	    }
+	}
+	
+	public void desabilitaBotones() {
+		boton1.setEnabled(false);
+		boton2.setEnabled(false);
+		boton3.setEnabled(false);
+		boton4.setEnabled(false);
+		boton5.setEnabled(false);
+		boton6.setEnabled(false);
+		boton7.setEnabled(false);
+		boton8.setEnabled(false);
+		boton9.setEnabled(false);
+	}
+	
+	public void turno() {
+		String jugador = "O";
+		if(turno) {
+			turno = false;
+			jugador = "X";
+			boton1.setBackground(Color.red);
 		}
-
+		else {
+			turno = true;
+			jugador = "O";
+			boton1.setBackground(Color.cyan);
+		}
 	}
 }
