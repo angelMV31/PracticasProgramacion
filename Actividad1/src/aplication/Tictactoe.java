@@ -89,6 +89,16 @@ public class Tictactoe {
 				boton8.setText("");
 				boton9.setText("");
 				
+				boton1.setIcon(null);
+				boton2.setIcon(null);
+				boton3.setIcon(null);
+				boton4.setIcon(null);
+				boton5.setIcon(null);
+				boton6.setIcon(null);
+				boton7.setIcon(null);
+				boton8.setIcon(null);
+				boton9.setIcon(null);
+				
 				boton1.setBackground(Color.white);
 				boton2.setBackground(Color.white);
 				boton3.setBackground(Color.white);
@@ -132,7 +142,7 @@ public class Tictactoe {
 		panel.setBackground(Color.blue);
 		
 		boton1 = new JButton("");
-		boton1.setFont(new Font("Times New Roman", Font.BOLD, 60));
+		boton1.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		boton1.addActionListener(new ActionListener() {
 
 			@Override
@@ -142,16 +152,24 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("X.jpg"));
+					boton1.setIcon(variableImg);
+					boton1.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/X.jpg")));
 					boton1.setBackground(Color.red);
 					
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("0.png"));
+					boton1.setIcon(variableImg);
+					boton1.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/0.png")));
 					boton1.setBackground(Color.cyan);
 				}
 				boton1.setText(jugador);
 				boton1.setEnabled(false);
+				
+				
 				validarGanador();
 			}
 			
@@ -160,7 +178,7 @@ public class Tictactoe {
 		panel.add(boton1);
 		
 		boton2 = new JButton("");
-		boton2.setFont(new Font("Times New Roman", Font.BOLD, 60));
+		boton2.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		boton2.addActionListener(new ActionListener() {
 
 			@Override
@@ -170,11 +188,18 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("X.jpg"));
+					boton2.setIcon(variableImg);
+					boton2.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/X.jpg")));
 					boton2.setBackground(Color.red);
+					
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("0.png"));
+					boton2.setIcon(variableImg);
+					boton2.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/0.png")));
 					boton2.setBackground(Color.cyan);
 				}
 				boton2.setText(jugador);
@@ -186,7 +211,7 @@ public class Tictactoe {
 		panel.add(boton2);
 		
 		boton3 = new JButton("");
-		boton3.setFont(new Font("Times New Roman", Font.BOLD, 60));
+		boton3.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		boton3.addActionListener(new ActionListener() {
 
 			@Override
@@ -196,11 +221,18 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("X.jpg"));
+					boton3.setIcon(variableImg);
+					boton3.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/X.jpg")));
 					boton3.setBackground(Color.red);
+					
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("0.png"));
+					boton3.setIcon(variableImg);
+					boton3.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/0.png")));
 					boton3.setBackground(Color.cyan);
 				}
 				boton3.setText(jugador);
@@ -212,7 +244,7 @@ public class Tictactoe {
 		panel.add(boton3);
 		
 		boton4 = new JButton("");
-		boton4.setFont(new Font("Times New Roman", Font.BOLD, 60));
+		boton4.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		boton4.addActionListener(new ActionListener() {
 
 			@Override
@@ -222,11 +254,18 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("X.jpg"));
+					boton4.setIcon(variableImg);
+					boton4.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/X.jpg")));
 					boton4.setBackground(Color.red);
+					
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("0.png"));
+					boton4.setIcon(variableImg);
+					boton4.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/0.png")));
 					boton4.setBackground(Color.cyan);
 				}
 				boton4.setText(jugador);
@@ -238,7 +277,7 @@ public class Tictactoe {
 		panel.add(boton4);
 		
 		boton5 = new JButton("");
-		boton5.setFont(new Font("Times New Roman", Font.BOLD, 60));
+		boton5.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		boton5.addActionListener(new ActionListener() {
 
 			@Override
@@ -248,11 +287,18 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("X.jpg"));
+					boton5.setIcon(variableImg);
+					boton5.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/X.jpg")));
 					boton5.setBackground(Color.red);
+					
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("0.png"));
+					boton5.setIcon(variableImg);
+					boton5.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/0.png")));
 					boton5.setBackground(Color.cyan);
 				}
 				boton5.setText(jugador);
@@ -264,7 +310,7 @@ public class Tictactoe {
 		panel.add(boton5);
 		
 		boton6 = new JButton("");
-		boton6.setFont(new Font("Times New Roman", Font.BOLD, 60));
+		boton6.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		boton6.addActionListener(new ActionListener() {
 
 			@Override
@@ -274,11 +320,18 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("X.jpg"));
+					boton6.setIcon(variableImg);
+					boton6.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/X.jpg")));
 					boton6.setBackground(Color.red);
+					
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("0.png"));
+					boton6.setIcon(variableImg);
+					boton6.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/0.png")));
 					boton6.setBackground(Color.cyan);
 				}
 				boton6.setText(jugador);
@@ -290,7 +343,7 @@ public class Tictactoe {
 		panel.add(boton6);
 		
 		boton7 = new JButton("");
-		boton7.setFont(new Font("Times New Roman", Font.BOLD, 60));
+		boton7.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		boton7.addActionListener(new ActionListener() {
 
 			@Override
@@ -300,11 +353,18 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("X.jpg"));
+					boton7.setIcon(variableImg);
+					boton7.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/X.jpg")));
 					boton7.setBackground(Color.red);
+					
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("0.png"));
+					boton7.setIcon(variableImg);
+					boton7.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/0.png")));
 					boton7.setBackground(Color.cyan);
 				}
 				boton7.setText(jugador);
@@ -316,7 +376,7 @@ public class Tictactoe {
 		panel.add(boton7);
 		
 		boton8 = new JButton("");
-		boton8.setFont(new Font("Times New Roman", Font.BOLD, 60));
+		boton8.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		boton8.addActionListener(new ActionListener() {
 
 			@Override
@@ -326,11 +386,18 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("X.jpg"));
+					boton8.setIcon(variableImg);
+					boton8.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/X.jpg")));
 					boton8.setBackground(Color.red);
+				
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("0.png"));
+					boton8.setIcon(variableImg);
+					boton8.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/0.png")));
 					boton8.setBackground(Color.cyan);
 				}
 				boton8.setText(jugador);
@@ -342,7 +409,7 @@ public class Tictactoe {
 		panel.add(boton8);
 		
 		boton9 = new JButton("");
-		boton9.setFont(new Font("Times New Roman", Font.BOLD, 60));
+		boton9.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		boton9.addActionListener(new ActionListener() {
 
 			@Override
@@ -352,11 +419,18 @@ public class Tictactoe {
 				if(turno) {
 					turno = false;
 					jugador = "X";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("X.jpg"));
+					boton9.setIcon(variableImg);
+					boton9.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/X.jpg")));
 					boton9.setBackground(Color.red);
+					
 				}
 				else {
 					turno = true;
 					jugador = "O";
+					ImageIcon variableImg= new ImageIcon(getClass().getResource("0.png"));
+					boton9.setIcon(variableImg);
+					boton9.setDisabledIcon(new ImageIcon(Tictactoe.class.getResource("/aplication/0.png")));
 					boton9.setBackground(Color.cyan);
 				}
 				boton9.setText(jugador);
@@ -539,17 +613,4 @@ public class Tictactoe {
 		boton9.setEnabled(false);
 	}
 	
-	public void turno() {
-		String jugador = "O";
-		if(turno) {
-			turno = false;
-			jugador = "X";
-			boton1.setBackground(Color.red);
-		}
-		else {
-			turno = true;
-			jugador = "O";
-			boton1.setBackground(Color.cyan);
-		}
-	}
 }
