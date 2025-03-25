@@ -15,6 +15,7 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import java.awt.event.ActionEvent;
 
 public class Rompecabezas {
@@ -28,10 +29,7 @@ public class Rompecabezas {
     btnNewButton_9,btnNewButton_8,btnNewButton_12,btnNewButton_7,
     btnNewButton_11,btnNewButton_13,btnNewButton_14,btnNewButton_15;
 
-	JButton botones[][] = {{btnNewButton_1,btnNewButton_2,btnNewButton_4,btnNewButton_3},
-							{btnNewButton,btnNewButton_6,btnNewButton_5,btnNewButton_10},
-							{btnNewButton_9,btnNewButton_8,btnNewButton_12,btnNewButton_7},
-							{btnNewButton_11,btnNewButton_13,btnNewButton_14,btnNewButton_15}};
+	JButton[][] botones;
 	/**
 	 * Launch the application.
 	 */
@@ -61,7 +59,7 @@ public class Rompecabezas {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(214,178,126));
-		frame.setBounds(100, 100, 697, 688);
+		frame.setBounds(100, 100, 1101, 688);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -74,112 +72,257 @@ public class Rompecabezas {
 		panel.setLayout(new GridLayout(4, 4, 20, 20));
 		
 		btnNewButton_1 = new JButton("1");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_1);
+			}
+		});
 		btnNewButton_1.setBackground(new Color(214,178,126));
 		btnNewButton_1.setForeground(Color.white);
 		btnNewButton_1.setFont(etiq);
 		panel.add(btnNewButton_1);
 		
 		btnNewButton_2 = new JButton("2");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_2);
+			}
+		});
 		btnNewButton_2.setBackground(new Color(214,178,126));
 		btnNewButton_2.setForeground(Color.white);
 		btnNewButton_2.setFont(etiq);
 		panel.add(btnNewButton_2);
 		
 		btnNewButton_4 = new JButton("3");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_4);
+			}
+		});
 		btnNewButton_4.setBackground(new Color(214,178,126));
 		btnNewButton_4.setForeground(Color.white);
 		btnNewButton_4.setFont(etiq);
 		panel.add(btnNewButton_4);
 		
 		btnNewButton_3 = new JButton("4");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_3);
+			}
+		});
 		btnNewButton_3.setBackground(new Color(214,178,126));
 		btnNewButton_3.setForeground(Color.white);
 		btnNewButton_3.setFont(etiq);
 		panel.add(btnNewButton_3);
 		
 		btnNewButton = new JButton("5");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton);
+			}
+		});
 		btnNewButton.setBackground(new Color(214,178,126));
 		btnNewButton.setForeground(Color.white);
 		btnNewButton.setFont(etiq);
 		panel.add(btnNewButton);
 		
 		btnNewButton_6 = new JButton("6");
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_6);
+			}
+		});
 		btnNewButton_6.setBackground(new Color(214,178,126));
 		btnNewButton_6.setForeground(Color.white);
 		btnNewButton_6.setFont(etiq);
 		panel.add(btnNewButton_6);
 		
 		btnNewButton_5 = new JButton("7");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_5);
+			}
+		});
 		btnNewButton_5.setBackground(new Color(214,178,126));
 		btnNewButton_5.setForeground(Color.white);
 		btnNewButton_5.setFont(etiq);
 		panel.add(btnNewButton_5);
 		
 		btnNewButton_10 = new JButton("8");
+		btnNewButton_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_10);
+			}
+		});
 		btnNewButton_10.setBackground(new Color(214,178,126));
 		btnNewButton_10.setForeground(Color.white);
 		btnNewButton_10.setFont(etiq);
 		panel.add(btnNewButton_10);
 		
 		btnNewButton_9 = new JButton("9");
+		btnNewButton_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_9);
+			}
+		});
 		btnNewButton_9.setBackground(new Color(214,178,126));
 		btnNewButton_9.setForeground(Color.white);
 		btnNewButton_9.setFont(etiq);
 		panel.add(btnNewButton_9);
 		
 		btnNewButton_8 = new JButton("10");
+		btnNewButton_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_8);
+			}
+		});
 		btnNewButton_8.setBackground(new Color(214,178,126));
 		btnNewButton_8.setForeground(Color.white);
 		btnNewButton_8.setFont(etiq);
 		panel.add(btnNewButton_8);
 		
 		btnNewButton_12 = new JButton("11");
+		btnNewButton_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_12);
+			}
+		});
 		btnNewButton_12.setBackground(new Color(214,178,126));
 		btnNewButton_12.setForeground(Color.white);
 		btnNewButton_12.setFont(etiq);
 		panel.add(btnNewButton_12);
 		
 		btnNewButton_7 = new JButton("12");
+		btnNewButton_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_7);
+			}
+		});
 		btnNewButton_7.setBackground(new Color(214,178,126));
 		btnNewButton_7.setForeground(Color.white);
 		btnNewButton_7.setFont(etiq);
 		panel.add(btnNewButton_7);
 		
 		btnNewButton_11 = new JButton("13");
+		btnNewButton_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_11);
+			}
+		});
 		btnNewButton_11.setBackground(new Color(214,178,126));
 		btnNewButton_11.setForeground(Color.white);
 		btnNewButton_11.setFont(etiq);
 		panel.add(btnNewButton_11);
 		
 		btnNewButton_13 = new JButton("14");
+		btnNewButton_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_13);
+			}
+		});
 		btnNewButton_13.setBackground(new Color(214,178,126));
 		btnNewButton_13.setForeground(Color.white);
 		btnNewButton_13.setFont(etiq);
 		panel.add(btnNewButton_13);
 		
 		btnNewButton_14 = new JButton("15");
+		btnNewButton_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_14);
+			}
+		});
 		btnNewButton_14.setBackground(new Color(214,178,126));
 		btnNewButton_14.setForeground(Color.white);
 		btnNewButton_14.setFont(etiq);
 		panel.add(btnNewButton_14);
 		
 		btnNewButton_15 = new JButton("");
+		btnNewButton_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				intercambiar(btnNewButton_15);
+			}
+		});
 		btnNewButton_15.setBackground(new Color(214,178,126));
 		btnNewButton_15.setForeground(Color.white);
+		btnNewButton_15.setFont(etiq);
 		panel.add(btnNewButton_15);
 		
+		botones = new JButton[][] {{btnNewButton_1,btnNewButton_2,btnNewButton_4,btnNewButton_3},
+				{btnNewButton,btnNewButton_6,btnNewButton_5,btnNewButton_10},
+				{btnNewButton_9,btnNewButton_8,btnNewButton_12,btnNewButton_7},
+				{btnNewButton_11,btnNewButton_13,btnNewButton_14,btnNewButton_15}};
+		
 		JLabel lblNewLabel = new JLabel("Juego de Rompecabezas");
-		lblNewLabel.setBounds(38, 0, 635, 58);
+		lblNewLabel.setBounds(115, 0, 938, 58);
 		lblNewLabel.setBackground(new Color(214,178,126));
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JButton btnNewButton_16 = new JButton("Jugar nuevamente");
-		btnNewButton_16.setBounds(188, 583, 317, 47);
+		btnNewButton_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				revolver();
+			}
+		});
+		btnNewButton_16.setBounds(415, 583, 317, 47);
 		btnNewButton_16.setBackground(new Color(164, 90, 53));
 		btnNewButton_16.setFont(new Font("Times New Roman", Font.BOLD, 25));
 		btnNewButton_16.setForeground(Color.white);
 		frame.getContentPane().add(btnNewButton_16);
+		
+		revolver();
 	}
+	
+	public void revolver() {
+		JButton aux = new JButton("");
+		Random rand = new Random();
+		
+		int x;
+		int y;
+		int x2;
+		int y2;
+		for(int i = 0; i<16; i++) {
+			x = rand.nextInt(4);
+			y = rand.nextInt(4);
+			x2 = rand.nextInt(4);
+			y2 = rand.nextInt(4);
+			
+	        aux.setText(botones[x][y].getText());
+	        botones[x][y].setText(botones[x2][y2].getText());
+	        botones[x2][y2].setText(aux.getText());
+			
+		}
+		
+	}
+	
+	public void intercambiar(JButton boton) {
+		JButton aux = new JButton("");
+		
+		int filaBtnVacio = 0, rengBtnVacio = 0, filaBtnPrecionado = 0, rengBtnPrecionado = 0;
+		
+		
+		for(int y = 0; y<=3; y++) {
+			for(int x = 0; x<=3; x++) {
+				if(botones[y][x].getText().equals("")) {
+					rengBtnVacio = y;
+					filaBtnVacio = x;
+					
+				}
+				if(botones[y][x].getText().equals(boton.getText())) {
+					rengBtnPrecionado = y;
+					filaBtnPrecionado = x;
+				}
+			}
+		}
+		
+		if ((filaBtnPrecionado == filaBtnVacio && (rengBtnPrecionado == rengBtnVacio - 1 || rengBtnPrecionado == rengBtnVacio + 1)) || 
+		        (rengBtnPrecionado == rengBtnVacio && (filaBtnPrecionado == filaBtnVacio - 1 || filaBtnPrecionado == filaBtnVacio + 1)))  {
+			
+			aux.setText(boton.getText());
+			boton.setText("");
+			botones[rengBtnVacio][filaBtnVacio].setText(aux.getText());
+		}
+		
+	}	
 }
