@@ -460,7 +460,7 @@ public class Rompecabezas {
 	    tiempoDeJuego = new TimerTask() {
 	        @Override
 	        public void run() {
-	            seg++;
+	        	seg++;
 	            lblNewLabel_1.setText(String.valueOf(seg)+"s");
 	        }
 	    };
@@ -489,8 +489,9 @@ public class Rompecabezas {
 	    }
 
 	    if (veces == 16) {
+	    	tiempo.cancel();
 	        JOptionPane.showMessageDialog(null, "Ganaste", "Usted Gano el Juego",JOptionPane.INFORMATION_MESSAGE);
-	        tiempo.cancel();
+	        
 	    }
 	}
 }
