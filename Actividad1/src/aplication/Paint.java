@@ -37,6 +37,8 @@ public class Paint implements MouseListener, MouseMotionListener {
 	
 	private PaintPanel panel;
 	
+	int tool = 1;
+	
 	Color color = Color.black;
 	
 	private ArrayList<Point> puntos = new ArrayList<Point>();
@@ -48,8 +50,14 @@ public class Paint implements MouseListener, MouseMotionListener {
  	ArrayList<pointCuztom> puntos2 = new ArrayList<pointCuztom>();
 	List<List<pointCuztom>> listaDePuntos2 = new ArrayList<>();
  	int puntoX, puntoY;
+ 	
+ 	ArrayList<figura> figuras = new ArrayList<figura>();
 	
- 	private Graphics2D g2;
+ 	int tipoFig;
+ 	Graphics2D g2;
+ 	Point puntoInicio;
+ 	Point puntoFinal;
+ 	boolean segundoClick = false;
 
 	/**
 	 * Launch the application.
@@ -109,6 +117,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		JButton Pincel = new JButton();
 		Pincel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tool = 1;
 			}
 		});
 		Pincel.setBackground(new Color(255, 255, 255));
@@ -141,6 +150,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		LimpiaPantalla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listaDePuntos.clear();
+				//figuras.clear();
 		        puntos.clear();
 		        panel.repaint();
 			}
@@ -177,6 +187,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		JButton Rectangulo = new JButton();
 		Rectangulo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		Rectangulo.setBackground(new Color(255, 255, 255));
@@ -187,6 +198,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		JButton Cuadrado = new JButton();
 		Cuadrado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tool = 2;
 			}
 		});
 		Cuadrado.setBackground(new Color(255, 255, 255));
@@ -197,6 +209,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		JButton Circulo = new JButton();
 		Circulo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tool = 3;
 			}
 		});
 		Circulo.setBackground(new Color(255, 255, 255));
@@ -207,6 +220,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		JButton Linea = new JButton();
 		Linea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tool = 4;
 			}
 		});
 		Linea.setBackground(new Color(255, 255, 255));
@@ -330,7 +344,37 @@ public class Paint implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+			if(tool == 2) {
+				tipoFig=2;
+				figuras.add(new figura(e.getX(), e.getY(), 50, 50, color, tipoFig, grosorSlider));
+				panel.repaint();
+			}
+			else if(tool == 3) {
+				tipoFig=3;
+				figuras.add(new figura(e.getX(), e.getY(), 50, 50, color, tipoFig, grosorSlider));
+				panel.repaint();
+			}
+			else if(tool == 4) {
+				
+				tipoFig=4;
+				
+				if (!segundoClick) {
+		            puntoInicio = e.getPoint();
+		            segundoClick = true;
+		        }
+				else {
+					
+		            puntoFinal = e.getPoint();
+		            
+		            figuras.add(new figura(puntoInicio.x, puntoInicio.y, puntoFinal.x, puntoFinal.y, color, tipoFig, grosorSlider));
+		            panel.repaint();
+		            
+		            segundoClick = false;
+		        }
+				/*
+				figuras.add(new figura(e.getX(), e.getY(), e2.getX(), e2.getY(), color, tipoFig, grosorSlider));
+				panel.repaint();*/
+			}
 	}
 
 	@Override
@@ -373,10 +417,13 @@ public class Paint implements MouseListener, MouseMotionListener {
  		
  		puntos.add(e.getPoint());
  		*/
-		panel.repaint(); 
-		puntoX = e.getX();
-		puntoY = e.getY();
-		puntos2.add(new pointCuztom(puntoX, puntoY, color, grosorSlider));
+		if(tool == 1) {
+			puntoX = e.getX();
+			puntoY = e.getY();
+			puntos2.add(new pointCuztom(puntoX, puntoY, color, grosorSlider));
+			panel.repaint(); 
+		}
+		
 	}
 
 	@Override
@@ -447,6 +494,26 @@ public class Paint implements MouseListener, MouseMotionListener {
  			
  	       }
  	       
+ 	      for (figura f : figuras) {
+ 	    	 
+ 	    	  g.setColor(f.color);
+ 	    	  ((Graphics2D) g).setStroke(new BasicStroke(f.grosor));
+ 	    	  
+ 	    	  switch(f.tipo) {
+ 	    	  
+ 	    	  case 2:
+ 	    		 g.drawRect(f.x, f.y, f.ancho, f.alto);
+ 	    		 break;
+ 	    		 
+ 	    	  case 3:
+ 	    		 g.drawOval(f.x, f.y, f.ancho, f.alto);
+ 	    		 break;
+ 	    		 
+ 	    	  case 4:
+ 	    		  g.drawLine(f.x, f.y, f.ancho, f.alto);
+ 	    	  }
+ 	      }
+ 	       
  	   }
  				
  	}
@@ -502,6 +569,50 @@ public class Paint implements MouseListener, MouseMotionListener {
 			g2.setStroke(new BasicStroke(grosor));
 			g2.drawLine(p1X, p1Y, p2X,p2Y);
 		}
+		
+	}
+	
+	class figura{
+		
+		public int x, y, ancho, alto, tipo,grosor;
+		Color color;
+		
+		public figura(int x, int y, int ancho, int alto, Color color, int tipo, int grosor) {
+		
+			this.x=x;
+			this.y=y;
+			this.ancho=ancho;
+			this.alto=alto;
+			this.color=color;
+			this.tipo=tipo;
+			this.grosor = grosor;
+			 	   
+    	   for (int i = 1; i < figuras.size(); i++) {
+    		   
+    		   figura p1 = figuras.get(i-1);
+    		   
+    		   g2.setColor(color);
+    		   g2.setStroke(new BasicStroke(grosor));
+    		  /* g2.drawRect(p1.x, p1.y, 50, 50);
+    		   g2.drawOval(p1.x, p1.y, 50, 50);
+    		   g2.drawLine(p1.x, p1.y, 50, 50);*/
+    		  switch(tipo) {
+ 	    	  case 2:
+ 	    		 g2.drawRect(p1.x, p1.y, 50, 50);
+ 	    		 break;
+ 	    		 
+ 	    	  case 3:
+ 	    		 g2.drawOval(p1.x, p1.y, 50, 50);
+ 	    		 break;
+ 	    		 
+ 	    	  case 4:
+ 	    		  g2.drawLine(p1.x, p1.y, ancho, alto);
+ 	    		 break;
+    	      }
+    		  
+    	  }	 	       
+	 	       
+		}	
 		
 	}
 	
