@@ -58,6 +58,7 @@ public class Paint implements MouseListener, MouseMotionListener {
  	Point puntoInicio;
  	Point puntoFinal;
  	boolean segundoClick = false;
+ 	boolean solido = false;
 
 	/**
 	 * Launch the application.
@@ -164,7 +165,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		
 		JSlider Grosor = new JSlider();
 		Grosor.setValue(1);
-		Grosor.setMaximum(20);
+		Grosor.setMaximum(500);
 		Grosor.setBounds(52, 107, 200, 26);
 		// ChangeListener sirve para actualizar el valor del grosor
 		Grosor.addChangeListener(new ChangeListener() {
@@ -194,7 +195,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		});
 		Rectangulo.setBackground(new Color(255, 255, 255));
 		Rectangulo.setIcon(new ImageIcon(Paint.class.getResource("/aplication/rect.png")));
-		Rectangulo.setBounds(58, 40, 50, 50);
+		Rectangulo.setBounds(10, 40, 50, 50);
 		panel_3.add(Rectangulo);
 		
 		JButton Cuadrado = new JButton();
@@ -205,7 +206,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		});
 		Cuadrado.setBackground(new Color(255, 255, 255));
 		Cuadrado.setIcon(new ImageIcon(Paint.class.getResource("/aplication/cuadrado.jpg")));
-		Cuadrado.setBounds(209, 40, 50, 50);
+		Cuadrado.setBounds(158, 40, 50, 50);
 		panel_3.add(Cuadrado);
 		
 		JButton Circulo = new JButton();
@@ -216,7 +217,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		});
 		Circulo.setBackground(new Color(255, 255, 255));
 		Circulo.setIcon(new ImageIcon(Paint.class.getResource("/aplication/circulo.png")));
-		Circulo.setBounds(58, 100, 50, 50);
+		Circulo.setBounds(10, 100, 50, 50);
 		panel_3.add(Circulo);
 		
 		JButton Linea = new JButton();
@@ -227,7 +228,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		});
 		Linea.setBackground(new Color(255, 255, 255));
 		Linea.setIcon(new ImageIcon(Paint.class.getResource("/aplication/linea.png")));
-		Linea.setBounds(209, 100, 50, 50);
+		Linea.setBounds(158, 100, 50, 50);
 		panel_3.add(Linea);
 		
 		JButton Flecha = new JButton();
@@ -237,7 +238,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		});
 		Flecha.setBackground(new Color(255, 255, 255));
 		Flecha.setIcon(new ImageIcon(Paint.class.getResource("/aplication/flecha.png")));
-		Flecha.setBounds(134, 100, 50, 50);
+		Flecha.setBounds(86, 100, 50, 50);
 		panel_3.add(Flecha);
 		
 		JButton Triangulo = new JButton();
@@ -247,8 +248,31 @@ public class Paint implements MouseListener, MouseMotionListener {
 		});
 		Triangulo.setBackground(new Color(255, 255, 255));
 		Triangulo.setIcon(new ImageIcon(Paint.class.getResource("/aplication/triangulo.png")));
-		Triangulo.setBounds(134, 40, 50, 50);
+		Triangulo.setBounds(86, 40, 50, 50);
 		panel_3.add(Triangulo);
+		
+		JButton btnRellena = new JButton();
+		btnRellena.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				solido = true;
+			}
+		});
+		btnRellena.setText("Rellena");
+		btnRellena.setIcon(null);
+		btnRellena.setBackground(Color.WHITE);
+		btnRellena.setBounds(218, 40, 76, 50);
+		panel_3.add(btnRellena);
+		
+		JButton btnVacio = new JButton("Contorno");
+		btnVacio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				solido = false;
+			}
+		});
+		btnVacio.setIcon(null);
+		btnVacio.setBackground(Color.WHITE);
+		btnVacio.setBounds(218, 100, 76, 50);
+		panel_3.add(btnVacio);
 		
 		JPanel panel_4 = new JPanel();
 		panel_1.add(panel_4);
@@ -348,12 +372,12 @@ public class Paint implements MouseListener, MouseMotionListener {
 		// TODO Auto-generated method stub
 			if(tool == 2) {
 				tipoFig=2;
-				figuras.add(new figura(e.getX(), e.getY(), 50, 50, color, tipoFig, grosorSlider));
+				figuras.add(new figura(e.getX(), e.getY(), grosorSlider, grosorSlider, color, tipoFig, 10, solido));
 				panel.repaint();
 			}
 			else if(tool == 3) {
 				tipoFig=3;
-				figuras.add(new figura(e.getX(), e.getY(), 50, 50, color, tipoFig, grosorSlider));
+				figuras.add(new figura(e.getX(), e.getY(), grosorSlider, grosorSlider, color, tipoFig, 10, solido));
 				panel.repaint();
 			}
 			else if(tool == 4) {
@@ -368,7 +392,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 					
 		            puntoFinal = e.getPoint();
 		            
-		            figuras.add(new figura(puntoInicio.x, puntoInicio.y, puntoFinal.x, puntoFinal.y, color, tipoFig, grosorSlider));
+		            figuras.add(new figura(puntoInicio.x, puntoInicio.y, puntoFinal.x, puntoFinal.y, color, tipoFig, grosorSlider,solido));
 		            panel.repaint();
 		            
 		            segundoClick = false;
@@ -501,11 +525,21 @@ public class Paint implements MouseListener, MouseMotionListener {
  	    	  switch(f.tipo) {
  	    	  
  	    	  case 2:
- 	    		 g.drawRect(f.x, f.y, f.ancho, f.alto);
+ 	    		 if(f.relleno) {
+ 	    			 g.fillRect(f.x, f.y, f.ancho, f.alto);
+ 	    		 }
+ 	    		 else {
+ 	    			g.drawRect(f.x, f.y, f.ancho, f.alto);
+ 	    		 }
  	    		 break;
  	    		 
  	    	  case 3:
- 	    		 g.drawOval(f.x, f.y, f.ancho, f.alto);
+ 	    		  if(f.relleno) {
+ 	    			 g.fillOval(f.x, f.y, f.ancho, f.alto);
+ 	    		  }
+ 	    		  else {
+ 	    			  g.drawOval(f.x, f.y, f.ancho, f.alto);
+ 	    		  }
  	    		 break;
  	    		 
  	    	  case 4:
@@ -573,10 +607,11 @@ public class Paint implements MouseListener, MouseMotionListener {
 	
 	class figura{
 		
+		boolean relleno;
 		public int x, y, ancho, alto, tipo,grosor;
 		Color color;
 		
-		public figura(int x, int y, int ancho, int alto, Color color, int tipo, int grosor) {
+		public figura(int x, int y, int ancho, int alto, Color color, int tipo, int grosor,boolean relleno) {
 		
 			this.x=x;
 			this.y=y;
@@ -585,6 +620,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 			this.color=color;
 			this.tipo=tipo;
 			this.grosor = grosor;
+			this.relleno=relleno;
 			 	   
     	   for (int i = 1; i < figuras.size(); i++) {
     		   
@@ -597,15 +633,26 @@ public class Paint implements MouseListener, MouseMotionListener {
     		   g2.drawLine(p1.x, p1.y, 50, 50);*/
     		  switch(tipo) {
  	    	  case 2:
- 	    		 g2.drawRect(p1.x, p1.y, 50, 50);
+ 	    		  if(solido) {
+ 	    			 g2.fillRect(p1.x, p1.y, grosor, grosor);
+ 	    		  }
+ 	    		  else {
+ 	    			  g2.drawRect(p1.x, p1.y, grosor, grosor);
+ 	    		  }
  	    		 break;
  	    		 
  	    	  case 3:
- 	    		 g2.drawOval(p1.x, p1.y, 50, 50);
+ 	    		 if(solido) {
+ 	    			 g2.fillOval(p1.x, p1.y, grosor, grosor);
+ 	    		  }
+ 	    		 else {
+ 	    			 g2.drawOval(p1.x, p1.y, grosor, grosor);
+ 	    		 }
  	    		 break;
  	    		 
  	    	  case 4:
  	    		  g2.drawLine(p1.x, p1.y, ancho, alto);
+ 	    		 
  	    		 break;
     	      }
     		  
@@ -614,5 +661,4 @@ public class Paint implements MouseListener, MouseMotionListener {
 		}	
 		
 	}
-	
 }
