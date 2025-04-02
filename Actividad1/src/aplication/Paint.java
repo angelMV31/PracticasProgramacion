@@ -118,6 +118,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		Pincel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tool = 1;
+				color = Color.black;
 			}
 		});
 		Pincel.setBackground(new Color(255, 255, 255));
@@ -128,6 +129,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 		JButton Borrador = new JButton();
 		Borrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tool = 5;
 				color = Color.white;
 			}
 		});
@@ -149,9 +151,9 @@ public class Paint implements MouseListener, MouseMotionListener {
 		JButton LimpiaPantalla = new JButton();
 		LimpiaPantalla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listaDePuntos.clear();
-				//figuras.clear();
-		        puntos.clear();
+				listaDePuntos2.clear();
+				figuras.clear();
+		        puntos2.clear();
 		        panel.repaint();
 			}
 		});
@@ -413,17 +415,13 @@ public class Paint implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		/*panel.repaint();
- 		
- 		puntos.add(e.getPoint());
- 		*/
-		if(tool == 1) {
+ 		panel.repaint();
+		if(tool == 1 || tool ==5) {
 			puntoX = e.getX();
 			puntoY = e.getY();
 			puntos2.add(new pointCuztom(puntoX, puntoY, color, grosorSlider));
 			panel.repaint(); 
 		}
-		
 	}
 
 	@Override
@@ -443,7 +441,6 @@ public class Paint implements MouseListener, MouseMotionListener {
  		@Override
  	   public void paintComponent(Graphics g) {
  	       super.paintComponent(g);
- 	      
  	       g2 = (Graphics2D) g; 
  	       
  	       //cambiar el color depende el color que se selecciona
@@ -488,6 +485,8 @@ public class Paint implements MouseListener, MouseMotionListener {
  	 	    		   pointCuztom p2 = trazo.get(i);
  	 	    		   
  	 	    		   p1.nuevoTrazo(p1.getX(), p1.getY(), p2.getX(), p2.getY(), g2);
+ 	 	    		   panel.repaint();
+ 	 	    		   
  		    	   }
  		    	   
  		       }
