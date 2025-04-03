@@ -608,7 +608,7 @@ public class Paint implements MouseListener, MouseMotionListener {
 	class figura{
 		
 		boolean relleno;
-		public int x, y, ancho, alto, tipo,grosor;
+		public int x, y, ancho, alto, tipo, grosor;
 		Color color;
 		
 		public figura(int x, int y, int ancho, int alto, Color color, int tipo, int grosor,boolean relleno) {
