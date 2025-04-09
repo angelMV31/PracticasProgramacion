@@ -5,8 +5,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.ArrayList;
+
+import javax.swing.Timer;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,10 +30,16 @@ public class Keyboard implements KeyListener{
 	JLabel lblNewLabel_1;
 	Timer timer;
 	int x = 370, y = 250;
+	int h =30, w = 30;
+	
+	ArrayList<Player> obstaculo = new ArrayList<Player>();
+	
 	int hor = 0, min = 0, seg = 0, cen = 0;
 	Timer temporizador;
 	boolean tempActivo = false;
 	JLabel lblNewLabel;
+	
+	Player player;
 	/**
 	 * Launch the application.
 	 */
@@ -67,6 +74,11 @@ public class Keyboard implements KeyListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		
+		player = new Player(x-5,y-5,h,w,Color.yellow);
+		
+		obstaculo.add(new Player(270, 50, 250, 20, Color.cyan));
+		obstaculo.add(new Player(270, 450, 250, 20, Color.cyan));
+		
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
@@ -79,7 +91,12 @@ public class Keyboard implements KeyListener{
 		panel.setBackground(new Color(255, 0, 0));
 		panel_1.add(panel, BorderLayout.NORTH);
 		
-		lblNewLabel = new JLabel("Time 00:00:00:00");
+		JLabel lblNewLabel_2 = new JLabel("Time: ");
+		lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lblNewLabel_2.setForeground(Color.white);
+		panel.add(lblNewLabel_2);
+		
+		lblNewLabel = new JLabel("00:00:00:00");
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		lblNewLabel.setForeground(Color.white);
 		panel.add(lblNewLabel);
@@ -90,9 +107,10 @@ public class Keyboard implements KeyListener{
 		JButton btnNewButton = new JButton("Reiniciar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				x=370;
-				y=250;
+				player.x=370;
+				player.y=250;
 				panel_4.requestFocusInWindow();
+				reiniciarTemp();
 				panel_4.repaint();
 			}
 		});
@@ -127,24 +145,62 @@ public class Keyboard implements KeyListener{
 		// TODO Auto-generated method stub
 		System.out.println(e.getKeyCode());
 		
+		Boolean m = true;
+		for(Player pared : obstaculo) {
+			if(player.colision(pared))
+				m=false;
+		}
+		
 		if(e.getKeyCode() == 87 || e.getKeyCode() == 38){
-			if(y>0) {
-				y-=5;
+			if (!tempActivo) {
+		        temporizador();
+		    }
+			if(m) {
+				if(player.y>0) {
+					player.y-=5;
+				}
+			}
+			else {
+				player.y+=7;
 			}
 		}
 		if(e.getKeyCode() == 83 || e.getKeyCode() == 40){
-			if(y<500) {
-				y+=5;
+			if (!tempActivo) {
+		        temporizador();
+		    }
+			if(m) {
+				if(player.y<500) {
+					player.y+=5;
+				}
+			}
+			else {
+				player.y-=7;
 			}
 		}
 		if(e.getKeyCode() == 65 || e.getKeyCode() == 37){
-			if(x>0) {
-				x-=5;
+			if (!tempActivo) {
+		        temporizador();
+		    }
+			if(m) {
+				if(player.x>0) {
+					player.x-=5;
+				}
+			}
+			else {
+				player.x+=7;
 			}
 		}
 		if(e.getKeyCode() == 68 || e.getKeyCode() == 39){
-			if(x<755) {
-				x+=5;
+			if (!tempActivo) {
+		        temporizador();
+		    }
+			if(m) {
+				if(player.x<755) {
+					player.x+=5;
+				}
+			}
+			else {
+				player.x-=7;
 			}
 		}
 		
@@ -173,10 +229,102 @@ public class Keyboard implements KeyListener{
 		 public void paintComponent(Graphics g) {
 			 super.paintComponent(g);
 			 Graphics2D g2 = (Graphics2D) g;
-			 g2.setColor(Color.yellow);
+			 g2.setColor(player.color);
 			 g2.setStroke(new BasicStroke(3));
-			 g2.fillRect(x, y, 30, 30);
+			 g2.fillRect(player.x, player.y, player.ancho, player.alto);
+		
+			 for (Player obs : obstaculo) {
+				    g2.setColor(obs.color);
+				    g2.fillRect(obs.x, obs.y, obs.ancho, obs.alto);
+			 }
 		 }
 	 }
 
+	public void actualizarEtiqueta() {
+		String tiempo = (hor<=9?"0":"")+hor+":" + (min<=9?"0":"")+min+":" + (seg<=9?"0":"")+seg+":" + (cen<=9?"0":"")+cen;
+		lblNewLabel.setText(tiempo);
+	}
+	
+	
+	public void temporizador() {
+		tempActivo = true;
+		
+		temporizador = new Timer(10, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				cen++;
+    			if(cen==100) {
+    				cen = 0;
+    				++seg;
+    			}
+    			if(seg==60) {
+    				seg = 0;
+    				++min;
+    			}
+    			if(min==60) {
+    				min = 0;
+    				++hor;
+    			}
+    			actualizarEtiqueta();
+			}
+			
+		});    
+		
+		temporizador.start();
+		
+	}
+	
+	
+	public void reanudarTemp() {
+		if(!tempActivo) {
+			temporizador();
+		}
+	}
+	
+	
+	public void detenerTemp() {
+		tempActivo = false;
+		if(temporizador!=null) {
+			temporizador.stop();
+		}
+	}
+	
+	
+	public void reiniciarTemp() {
+		tempActivo = false;
+		if(temporizador!=null) {
+			temporizador.stop();
+		}
+		
+		lblNewLabel.setText("00:00:00:00");
+		hor = 0; min = 0; seg = 0; cen = 0;
+	}
+	
+	
+	class Player extends JPanel {
+		int x, y, ancho, alto;
+		Color color;
+		
+		public Player(int x, int y, int ancho, int alto, Color color) {
+			this.x=x;
+			this.y=y;
+			this.ancho=ancho;
+			this.alto=alto;
+			this.color=color;
+		}
+		
+		public boolean colision(Player target) {
+			
+			if(this.x + 5 < target.x + target.ancho &&
+		             this.x + 5 + this.ancho > target.x &&
+		             this.y + 5 < target.y + target.alto &&
+		             this.y + 5 + this.alto > target.y)
+				return true;
+			
+			return false;
+			
+		}
+	}
 }
