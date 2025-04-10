@@ -28,18 +28,18 @@ public class Keyboard implements KeyListener{
 	private JFrame frame;
 	PaintPanel panel_4;
 	JLabel lblNewLabel_1;
-	Timer timer;
+	Timer timer, timer2;
 	int x = 370, y = 250;
 	int h =30, w = 30;
 	
 	ArrayList<Player> obstaculo = new ArrayList<Player>();
 	
-	int hor = 0, min = 0, seg = 0, cen = 0;
+	int hor = 0, min = 0, seg = 0, cen = 0, botonPress = 0;
 	Timer temporizador;
 	boolean tempActivo = false;
 	JLabel lblNewLabel;
 	
-	Player player;
+	Player player, shadow;
 	/**
 	 * Launch the application.
 	 */
@@ -74,7 +74,8 @@ public class Keyboard implements KeyListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		
-		player = new Player(x-5,y-5,h,w,Color.yellow);
+		player = new Player(x,y,h,w,Color.yellow);
+		shadow = new Player(x,y,h,w,Color.yellow);
 		
 		obstaculo.add(new Player(270, 50, 250, 20, Color.cyan));
 		obstaculo.add(new Player(270, 450, 250, 20, Color.cyan));
@@ -109,8 +110,13 @@ public class Keyboard implements KeyListener{
 			public void actionPerformed(ActionEvent e) {
 				player.x=370;
 				player.y=250;
+				
+				shadow.x=370;
+				shadow.y=250;
+				
 				panel_4.requestFocusInWindow();
 				reiniciarTemp();
+				timer2.stop();
 				panel_4.repaint();
 			}
 		});
@@ -131,76 +137,95 @@ public class Keyboard implements KeyListener{
 		panel_4.addKeyListener(this);
 		panel_4.setFocusable(true);
 		
+		ActionListener mover = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				update();
+			}
+		};
+		
+		timer2 = new Timer(5,mover);
 		
 	}
 	 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getKeyCode());
+		//System.out.println(e.getKeyCode());
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getKeyCode());
-		
+		//System.out.println(e.getKeyCode());
+		temporizador();
+		timer2.start();
+		botonPress = e.getKeyCode();
+		update();
+	}
+	
+	public void update() {
 		Boolean m = true;
 		for(Player pared : obstaculo) {
 			if(player.colision(pared))
 				m=false;
 		}
 		
-		if(e.getKeyCode() == 87 || e.getKeyCode() == 38){
+		if(m) {
+			shadow.x = player.x;
+			shadow.y = player.y;
+		}
+		
+		if(botonPress == 87 || botonPress == 38){
 			if (!tempActivo) {
-		        temporizador();
+		        
 		    }
 			if(m) {
 				if(player.y>0) {
-					player.y-=5;
+					player.y-=3;
 				}
 			}
 			else {
-				player.y+=7;
+				player.x = shadow.x;
+				player.y = shadow.y;
 			}
 		}
-		if(e.getKeyCode() == 83 || e.getKeyCode() == 40){
+		if(botonPress == 83 || botonPress == 40){
 			if (!tempActivo) {
-		        temporizador();
 		    }
 			if(m) {
 				if(player.y<500) {
-					player.y+=5;
+					player.y+=3;
 				}
 			}
 			else {
-				player.y-=7;
+				player.x = shadow.x;
+				player.y = shadow.y;
 			}
 		}
-		if(e.getKeyCode() == 65 || e.getKeyCode() == 37){
+		if(botonPress == 65 || botonPress == 37){
 			if (!tempActivo) {
-		        temporizador();
 		    }
 			if(m) {
 				if(player.x>0) {
-					player.x-=5;
+					player.x-=3;
 				}
 			}
 			else {
-				player.x+=7;
+				player.x = shadow.x;
+				player.y = shadow.y;
 			}
 		}
-		if(e.getKeyCode() == 68 || e.getKeyCode() == 39){
+		if(botonPress == 68 || botonPress == 39){
 			if (!tempActivo) {
-		        temporizador();
 		    }
 			if(m) {
 				if(player.x<755) {
-					player.x+=5;
+					player.x+=3;
 				}
 			}
 			else {
-				player.x-=7;
+				player.x = shadow.x;
+				player.y = shadow.y;
 			}
 		}
 		
@@ -213,13 +238,12 @@ public class Keyboard implements KeyListener{
 		*/
 		
 		panel_4.repaint();
-		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getKeyCode());
+		//System.out.println(e.getKeyCode());
 	}
 	
 	class PaintPanel extends JPanel{
@@ -317,10 +341,10 @@ public class Keyboard implements KeyListener{
 		
 		public boolean colision(Player target) {
 			
-			if(this.x + 5 < target.x + target.ancho &&
-		             this.x + 5 + this.ancho > target.x &&
-		             this.y + 5 < target.y + target.alto &&
-		             this.y + 5 + this.alto > target.y)
+			if(this.x - 1 < target.x + target.ancho &&
+		             this.x + 1 + this.ancho > target.x &&
+		             this.y - 1 < target.y + target.alto &&
+		             this.y + 1 + this.alto > target.y)
 				return true;
 			
 			return false;
