@@ -3,6 +3,7 @@ package aplication;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import javax.swing.Timer;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
@@ -29,8 +31,10 @@ public class Keyboard implements KeyListener{
 	PaintPanel panel_4;
 	JLabel lblNewLabel_1;
 	Timer timer, timer2;
-	int x = 370, y = 250;
-	int h =30, w = 30;
+	String tiempo;
+	int contador = 0;
+	int x = 20, y = 5;
+	int h =20, w = 20;
 	
 	ArrayList<Player> obstaculo = new ArrayList<Player>();
 	
@@ -39,7 +43,7 @@ public class Keyboard implements KeyListener{
 	boolean tempActivo = false;
 	JLabel lblNewLabel;
 	
-	Player player, shadow;
+	Player player, shadow, meta;
 	/**
 	 * Launch the application.
 	 */
@@ -70,15 +74,203 @@ public class Keyboard implements KeyListener{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 660);
+		frame.setBounds(100, 100, 1200, 750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		
 		player = new Player(x,y,h,w,Color.yellow);
 		shadow = new Player(x,y,h,w,Color.yellow);
+		meta = new Player(1150, 595, 35, 35, Color.green);//meta)
 		
-		obstaculo.add(new Player(270, 50, 250, 20, Color.cyan));
-		obstaculo.add(new Player(270, 450, 250, 20, Color.cyan));
+		
+		obstaculo.add(new Player(50, 0, 1185, 6, Color.cyan));//arriba
+		obstaculo.add(new Player(0, 0, 9, 622, Color.cyan));//izquierda
+		obstaculo.add(new Player(9, 616, 1145, 6, Color.cyan));//abajo
+		obstaculo.add(new Player(1178, 6, 9, 580, Color.cyan));//derecha
+		
+		//columnas verticales
+		obstaculo.add(new Player(50, 6, 9, 150, Color.cyan));
+		obstaculo.add(new Player(50, 300, 9, 100, Color.cyan));
+		obstaculo.add(new Player(50, 450, 9, 116, Color.cyan));
+		
+		obstaculo.add(new Player(109, 225, 9, 100, Color.cyan));
+		obstaculo.add(new Player(109, 375, 9, 100, Color.cyan));
+		obstaculo.add(new Player(109, 525, 9, 41, Color.cyan));
+		
+		obstaculo.add(new Player(168, 215, 9, 140, Color.cyan));
+		obstaculo.add(new Player(168, 425, 9, 141, Color.cyan));
+		
+		obstaculo.add(new Player(227, 225, 9, 100, Color.cyan));
+		obstaculo.add(new Player(227, 375, 9, 100, Color.cyan));
+		obstaculo.add(new Player(227, 525, 9, 41, Color.cyan));
+		
+		obstaculo.add(new Player(286, 6, 9, 69, Color.cyan));
+		obstaculo.add(new Player(286, 125, 9, 100, Color.cyan));
+		obstaculo.add(new Player(286, 275, 9, 100, Color.cyan));
+		obstaculo.add(new Player(286, 425, 9, 191, Color.cyan));
+		
+		obstaculo.add(new Player(345, 56, 9, 119, Color.cyan));
+		obstaculo.add(new Player(345, 225, 9, 100, Color.cyan));
+		obstaculo.add(new Player(345, 375, 9, 100, Color.cyan));
+		obstaculo.add(new Player(345, 525, 9, 41, Color.cyan));
+		
+		obstaculo.add(new Player(404, 6, 9, 69, Color.cyan));
+		obstaculo.add(new Player(404, 125, 9, 100, Color.cyan));
+		obstaculo.add(new Player(404, 275, 9, 100, Color.cyan));
+		obstaculo.add(new Player(404, 425, 9, 141, Color.cyan));
+		
+		obstaculo.add(new Player(463, 56, 9, 119, Color.cyan));
+		obstaculo.add(new Player(463, 225, 9, 100, Color.cyan));
+		obstaculo.add(new Player(463, 375, 9, 192, Color.cyan));
+		
+		obstaculo.add(new Player(522, 6, 9, 169, Color.cyan));
+		obstaculo.add(new Player(522, 225, 9, 100, Color.cyan));
+		obstaculo.add(new Player(522, 375, 9, 242, Color.cyan));
+		
+		obstaculo.add(new Player(581, 56, 9, 119, Color.cyan));
+		obstaculo.add(new Player(581, 225, 9, 200, Color.cyan));
+		obstaculo.add(new Player(581, 475, 9, 91, Color.cyan));
+		
+		obstaculo.add(new Player(640, 6, 9, 69, Color.cyan));
+		obstaculo.add(new Player(640, 125, 9, 250, Color.cyan));
+		obstaculo.add(new Player(640, 425, 9, 141, Color.cyan));
+		
+		obstaculo.add(new Player(699, 56, 9, 169, Color.cyan));
+		obstaculo.add(new Player(699, 275, 9, 150, Color.cyan));
+		obstaculo.add(new Player(699, 475, 9, 91, Color.cyan));
+		
+		obstaculo.add(new Player(758, 6, 9, 119, Color.cyan));
+		obstaculo.add(new Player(758, 175, 9, 200, Color.cyan));
+		obstaculo.add(new Player(758, 425, 9, 141, Color.cyan));
+		
+		obstaculo.add(new Player(817, 56, 9, 269, Color.cyan));
+		obstaculo.add(new Player(817, 375, 9, 191, Color.cyan));
+		
+		obstaculo.add(new Player(876, 6, 9, 169, Color.cyan));
+		obstaculo.add(new Player(876, 225, 9, 150, Color.cyan));
+		obstaculo.add(new Player(876, 425, 9, 141, Color.cyan));
+		
+		obstaculo.add(new Player(935, 56, 9, 119, Color.cyan));
+		obstaculo.add(new Player(935, 225, 9, 100, Color.cyan));
+		obstaculo.add(new Player(935, 375, 9, 100, Color.cyan));
+		obstaculo.add(new Player(935, 510, 9, 105, Color.cyan));
+		
+		obstaculo.add(new Player(994, 6, 9, 219, Color.cyan)); 
+		obstaculo.add(new Player(994, 275, 9, 231, Color.cyan));
+		
+		obstaculo.add(new Player(1053, 56, 9, 169, Color.cyan));
+		obstaculo.add(new Player(1053, 275, 9, 100, Color.cyan));
+		obstaculo.add(new Player(1053, 425, 9, 81, Color.cyan));
+		
+		obstaculo.add(new Player(1112, 6, 9, 119, Color.cyan));
+		obstaculo.add(new Player(1112, 175, 9, 150, Color.cyan)); 
+		obstaculo.add(new Player(1112, 375, 9, 137, Color.cyan));
+		
+		//columnas horizontales
+		obstaculo.add(new Player(50, 56, 118, 9, Color.cyan));
+		obstaculo.add(new Player(109, 106, 59, 9, Color.cyan));
+		obstaculo.add(new Player(50, 156, 118, 9, Color.cyan));
+		obstaculo.add(new Player(50, 356, 59, 9, Color.cyan));
+		obstaculo.add(new Player(50, 456, 59, 9, Color.cyan));
+		obstaculo.add(new Player(50, 506, 59, 9, Color.cyan));
+		obstaculo.add(new Player(50, 556, 59, 9, Color.cyan));
+
+		obstaculo.add(new Player(108, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(108, 206, 59, 9, Color.cyan));
+		obstaculo.add(new Player(108, 406, 59, 9, Color.cyan));
+		obstaculo.add(new Player(108, 456, 59, 9, Color.cyan));
+		obstaculo.add(new Player(108, 506, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(168, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(168, 206, 59, 9, Color.cyan));
+		obstaculo.add(new Player(168, 256, 59, 9, Color.cyan));
+		obstaculo.add(new Player(168, 406, 59, 9, Color.cyan));
+		obstaculo.add(new Player(168, 556, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(227, 106, 59, 9, Color.cyan));
+		obstaculo.add(new Player(227, 356, 59, 9, Color.cyan));
+		obstaculo.add(new Player(227, 556, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(286, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(286, 106, 59, 9, Color.cyan));
+		obstaculo.add(new Player(286, 156, 59, 9, Color.cyan));
+		obstaculo.add(new Player(286, 506, 59, 9, Color.cyan));
+		obstaculo.add(new Player(286, 556, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(345, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(345, 106, 59, 9, Color.cyan));
+		obstaculo.add(new Player(345, 206, 59, 9, Color.cyan));
+		obstaculo.add(new Player(345, 506, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(404, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(404, 156, 59, 9, Color.cyan));
+		obstaculo.add(new Player(404, 456, 59, 9, Color.cyan));
+		obstaculo.add(new Player(404, 556, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(463, 106, 59, 9, Color.cyan));
+		obstaculo.add(new Player(463, 156, 59, 9, Color.cyan));
+		obstaculo.add(new Player(463, 206, 59, 9, Color.cyan));
+		obstaculo.add(new Player(463, 306, 59, 9, Color.cyan));
+		obstaculo.add(new Player(463, 556, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(522, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(522, 356, 59, 9, Color.cyan));
+		obstaculo.add(new Player(522, 456, 59, 9, Color.cyan));
+		obstaculo.add(new Player(522, 506, 59, 9, Color.cyan));
+		obstaculo.add(new Player(522, 556, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(581, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(581, 506, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(640, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(640, 156, 59, 9, Color.cyan));
+		obstaculo.add(new Player(640, 206, 59, 9, Color.cyan));
+		obstaculo.add(new Player(640, 556, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(699, 106, 59, 9, Color.cyan));
+		obstaculo.add(new Player(699, 406, 59, 9, Color.cyan));
+		obstaculo.add(new Player(699, 506, 59, 9, Color.cyan));
+		obstaculo.add(new Player(699, 556, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(758, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(758, 106, 59, 9, Color.cyan));
+		obstaculo.add(new Player(758, 356, 59, 9, Color.cyan));
+		obstaculo.add(new Player(758, 466, 59, 9, Color.cyan));
+		obstaculo.add(new Player(758, 556, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(817, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(817, 124, 59, 9, Color.cyan));
+		obstaculo.add(new Player(817, 465, 59, 9, Color.cyan));
+		obstaculo.add(new Player(817, 506, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(876, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(876, 256, 59, 9, Color.cyan));
+		obstaculo.add(new Player(876, 366, 59, 9, Color.cyan));
+		obstaculo.add(new Player(876, 465, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(994, 557, 184, 9, Color.cyan));
+		
+		obstaculo.add(new Player(935, 106, 59, 9, Color.cyan));
+		obstaculo.add(new Player(935, 170, 59, 9, Color.cyan));
+		obstaculo.add(new Player(935, 416, 59, 9, Color.cyan));
+		obstaculo.add(new Player(935, 506, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(994, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(994, 156, 59, 9, Color.cyan));
+		obstaculo.add(new Player(994, 275, 59, 9, Color.cyan));
+		obstaculo.add(new Player(994, 336, 59, 9, Color.cyan));
+		obstaculo.add(new Player(994, 506, 59, 9, Color.cyan));
+		
+		obstaculo.add(new Player(1053, 56, 59, 9, Color.cyan));
+		obstaculo.add(new Player(1053, 106, 59, 9, Color.cyan));
+		obstaculo.add(new Player(1053, 275, 59, 9, Color.cyan));
+		obstaculo.add(new Player(1053, 406, 59, 9, Color.cyan));
+		obstaculo.add(new Player(1053, 506, 59, 9, Color.cyan));
+		
+		
+		//panel 4 dimensiones
+		//x de 1185
+		//y de 622
 		
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
@@ -105,18 +297,21 @@ public class Keyboard implements KeyListener{
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Reiniciar");
+		JButton btnNewButton = new JButton("Jugar de Nuevo");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				player.x=370;
-				player.y=250;
+			public void actionPerformed(ActionEvent e) {		
+				player.x=20;
+				player.y=5;
 				
-				shadow.x=370;
-				shadow.y=250;
+				shadow.x=20;
+				shadow.y=5;
 				
 				panel_4.requestFocusInWindow();
+				
 				reiniciarTemp();
-				timer2.stop();
+				
+				contador=0;
+				
 				panel_4.repaint();
 			}
 		});
@@ -129,10 +324,10 @@ public class Keyboard implements KeyListener{
 		panel_1.add(panel_4, BorderLayout.CENTER);
 		panel_4.setLayout(null);
 		
-		/*lblNewLabel_1 = new JLabel();
+		lblNewLabel_1 = new JLabel();
 		lblNewLabel_1.setIcon(new ImageIcon(Keyboard.class.getResource("/aplication/pika.png")));
-		lblNewLabel_1.setBounds(x, y, 35, 35);
-		panel_4.add(lblNewLabel_1);*/
+		lblNewLabel_1.setBounds(1700, 595, 35, 35);
+		panel_4.add(lblNewLabel_1);
 		
 		panel_4.addKeyListener(this);
 		panel_4.setFocusable(true);
@@ -143,7 +338,7 @@ public class Keyboard implements KeyListener{
 			}
 		};
 		
-		timer2 = new Timer(5,mover);
+		timer2 = new Timer(3,mover);
 		
 	}
 	 
@@ -157,8 +352,12 @@ public class Keyboard implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		//System.out.println(e.getKeyCode());
-		temporizador();
-		timer2.start();
+		if(contador == 0) {
+			temporizador();
+			timer2.start();	
+			contador=1;
+		}
+		
 		botonPress = e.getKeyCode();
 		update();
 	}
@@ -193,7 +392,7 @@ public class Keyboard implements KeyListener{
 			if (!tempActivo) {
 		    }
 			if(m) {
-				if(player.y<500) {
+				if(player.y<600) {
 					player.y+=3;
 				}
 			}
@@ -219,7 +418,7 @@ public class Keyboard implements KeyListener{
 			if (!tempActivo) {
 		    }
 			if(m) {
-				if(player.x<755) {
+				if(player.x<1165) {
 					player.x+=3;
 				}
 			}
@@ -238,6 +437,8 @@ public class Keyboard implements KeyListener{
 		*/
 		
 		panel_4.repaint();
+		
+		validarGanar();
 	}
 
 	@Override
@@ -261,12 +462,14 @@ public class Keyboard implements KeyListener{
 				    g2.setColor(obs.color);
 				    g2.fillRect(obs.x, obs.y, obs.ancho, obs.alto);
 			 }
+			
 		 }
 	 }
 
 	public void actualizarEtiqueta() {
 		String tiempo = (hor<=9?"0":"")+hor+":" + (min<=9?"0":"")+min+":" + (seg<=9?"0":"")+seg+":" + (cen<=9?"0":"")+cen;
 		lblNewLabel.setText(tiempo);
+		
 	}
 	
 	
@@ -350,5 +553,24 @@ public class Keyboard implements KeyListener{
 			return false;
 			
 		}
+	}
+	
+	public void validarGanar() {
+		boolean gana = false;
+		if(player.colision(meta)) {
+			gana = true;
+			
+			temporizador.stop();
+			
+			detenerTemp();
+			
+			tiempo = lblNewLabel.getText();
+			
+			timer2.stop();
+			
+			JOptionPane.showMessageDialog(null, tiempo, "Ganaste", JOptionPane.INFORMATION_MESSAGE);
+			
+		}
+		
 	}
 }
